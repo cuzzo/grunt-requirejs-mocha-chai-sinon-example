@@ -3,9 +3,7 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     requirejs: {
       options: {
-        baseUrl: '.',
-        mainConfigFile: 'build.js',
-        out: 'dist/socialorgui.js'
+        baseUrl: '.'
       }
     },
     mocha: {
