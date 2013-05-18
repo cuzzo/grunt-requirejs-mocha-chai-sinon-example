@@ -1,7 +1,7 @@
 grunt-requirejs-mocha-chai-sinon-example
 ========================================
 
-An example using mocha in combination with RequireJS and Grunt.js (alongside chai and sinon).
+An example using Mocha in combination with RequireJS and Grunt.js (alongside Chai and Sinon.JS).
 
 
 Usage
@@ -88,7 +88,7 @@ module.exports = function(grunt) {
 
 ### [package.json](https://github.com/isaacs/npm/blob/master/doc/cli/json.md "Detailed package.json Documentation") Configuration
 
-This example uses Grunt, require.js, mocha, chai, and sinon--and is, therefore, dependent upon them.
+This example uses Grunt, require.js, Mocha, Chai, and Sinon.JS--and is, therefore, dependent upon them.
 
 It's good practice to put your projects dependencies inside a package.json file (that makes it easy to fetch all the dependencies with a simple ```npm install``` command).
 
@@ -191,7 +191,7 @@ For this simple example, the path directory is:
 ```
 `-repo/          # Repository of all code.
   `-css/         # Directory containing css / stylesheets.
-  `-lib/         # Directory containing third-party libraries (chai, mocha, RequireJS, and sinon).
+  `-lib/         # Directory containing third-party libraries (Chai, Mocha, RequireJS, and Sinon.JS).
   `-src/         # Directory containing the source code of the application (which is a single file: "add-one.js").
   `-test/        # Directory containing the test code.
   `-config.js    # RequireJS configuration file.
