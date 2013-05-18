@@ -1,7 +1,7 @@
 grunt-requirejs-mocha-chai-sinon-example
 ========================================
 
-An example using mocha in combination with require.js and Grunt.js (alongside chai and sinon).
+An example using mocha in combination with RequireJS and Grunt.js (alongside chai and sinon).
 
 
 Usage
@@ -12,6 +12,195 @@ grunt-requirejs-mocha-chai-sinon-example has one usage: to demonstrate how to us
 Why is this helpful?  It's pretty tricky to figure it out on your own (or at least it was for me).  So, hopefully, this will be of some help to someone struggling to put this group of libraries together.
 
 grunt-requirejs-mocha-chai-sinon-example is purposefully lightweight.  There's no example demonstrating how to tie in Backbone.  But, if you're that far in the game, figuring out that piece should be trivial (I hope xD).
+
+
+
+Configuration Examples
+----------------------
+
+### [Gruntfile](http://gruntjs.com/sample-gruntfile "An Example Gruntfile") Configuration Example
+
+#### Mocha Configuration for Your Gruntfile:
+
+```javascript
+module.exports = function(grunt) {
+  grunt.initConfig({
+    mocha: {
+      browser: ['test/**/*.html'],
+      options: {
+        reporter: 'Nyan', // Duh!
+        run: true
+      }   
+    }
+  });
+  
+  grunt.loadNpmTasks('grunt-mocha');
+  
+  grunt.registerTask('test', ['mocha']);
+};
+```
+
+In this example, tests are stored in a ```test``` directory relative to the Gruntfile.
+
+#### RequireJS Configuration for Your Gruntfile:
+
+```javascript
+module.exports = function(grunt) {
+  grunt.initConfig({
+    requirejs: {
+      options: {
+        baseUrl: '.'
+      }
+    }
+  });
+};
+```
+
+This assumes that your require.js configuration is in the same directory as your Gruntfile (which it is for this example, but may not be in your case).
+
+
+#### Putting It Together:
+
+```javascript
+module.exports = function(grunt) {
+  grunt.initConfig({
+    pkg: grunt.file.readJSON('package.json'),
+    requirejs: {
+      options: {
+        baseUrl: '.' 
+      }   
+    },  
+    mocha: {
+      browser: ['test/**/*.html'],
+      options: {
+        reporter: 'Nyan', // Duh!
+        run: true
+      }   
+    }   
+  }); 
+
+  grunt.loadNpmTasks('grunt-mocha');
+
+  grunt.registerTask('test', ['mocha']);
+};
+```
+
+
+### [package.json](https://github.com/isaacs/npm/blob/master/doc/cli/json.md "Detailed package.json Documentation") Configuration
+
+This example uses Grunt, require.js, mocha, chai, and sinon--and is, therefore, dependent upon them.
+
+It's good practice to put your projects dependencies inside a package.json file (that makes it easy to fetch all the dependencies with a simple ```npm install``` command).
+
+
+```javascript
+{
+  "name": "grunt-requirejs-mocha-chai-sinon-example",
+  "version": "0.0.1",
+  "dependencies": {
+    "grunt-lib-phantomjs": "~0.3",
+    "requirejs": "~2.1.4",
+    "sinon": "~1.6.0",
+    "chai": "~1.6.0",
+    "mocha": "~1.9.0"
+  },  
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-cli": "~0.1.7"
+  }
+}
+```
+
+
+### [RequireJS Config File](http://requirejs.org/docs/api.html#config "RequireJS Config File Documentation") Example
+
+```javascript
+require.config({
+  'paths': {
+    // src
+    'add-one': 'src/add-one'
+  }
+});
+```
+
+In this example, there's only one JS file to the "application".  With this config file, the add-one.js code can be accessed like so:
+
+```
+require(['add-one'], function(AddOne) {
+  var three = AddOne.addOne(2);
+});
+```
+
+
+Testing Example
+---------------
+
+### Unit testing with Mocha and Chai is dead simple.
+
+In this example, I'm testing an addOne function.  The code looks something like:
+
+```javascript
+// Describe allows you to create a group of tests.
+describe('addOne Test', function() {
+  // it() is the test.
+  it('Should be 2.', function() {
+    // Chai provides a nice interface for assertions.
+    chai.assert.equal(AddOne.addOne(1), 2);
+  });
+});
+```
+
+### An Example of Testing an Asynchronous RequireJS Callback:
+
+```javascript
+describe('addOne Test', function() {
+ it('Should be 2.', function(done) {
+   require([
+     'add-one'
+   ], function(AddOne) {
+     chai.assert.equal(AddOne.addOne(1), 2);
+   });
+ });
+});
+```
+
+Notice the addition of ```done``` as a parameter to ```it()```.  ```done``` allows your tests to occurr asynchronoulsy, but it requires that it be envoked to end the test--notice the call to ```done()``` at the end of the test.
+
+### A Stubbing Example with Sinon
+
+```javascript
+describe('addOne Test', function() {
+  it('Should be 42; stubbed by sinon.', function() {
+    AddOne.addOne = sinon.stub().returns(42);
+    chai.assert.equal(AddOne.addOne(1), 42);
+  });
+});
+```
+
+```sinon.stub().returns()``` allows you to override a function and force it to return whatever you want.  In this example, it returns 42.
+
+
+
+Application Structure
+---------------------
+
+The point of tying all of these libraries together is to help assuage the pain of working with large JavaScript projects.  Feel free to organize you're project however you like, but it's probably worth some of your time to think about the structure.
+
+For this simple example, the path directory is:
+
+```
+`-repo/          # Repository of all code.
+  `-css/         # Directory containing css / stylesheets.
+  `-lib/         # Directory containing third-party libraries (chai, mocha, RequireJS, and sinon).
+  `-src/         # Directory containing the source code of the application (which is a single file: "add-one.js").
+  `-test/        # Directory containing the test code.
+  `-config.js    # RequireJS configuration file.
+  `-Gruntfile.js # Grunt.js configuration file.
+  `-license.txt  # License to hack.
+  `-package.json # package configuratoin file.
+  `-README.md    # This lovely file.
+```
+
 
 
 Dependencies
@@ -62,6 +251,14 @@ Done, without errors.
 
 you messed something up (somehow).
 
+
+Other Resources
+---------------
+* [grunt-mocha](https://github.com/kmiyashiro/grunt-mocha "An Example of Running Mocha Tests with Grunt") - Most helpful resource that I found while trying to tie these libraries together.
+* [Grunt Guide](http://gruntjs.com/getting-started "Getting Started with Grunt") - Grunt's documentation (in case you have any troubles with grunt or grunt-cli).
+* [Sinon Examples](http://sinonjs.org/docs/ "Sinon Documentation - "Mocks and Stubs and Spies, oh my!") - Use cases for Sinon (and why you might want to consider using it, if you're not already).
+* [Mocha Examples](http://visionmedia.github.io/mocha/#getting-started "Getting Started with Mocha.js") - Unit tests example with Mocha (and why you might want to consider it, if you're using something else).
+* [RequireJS / Backbone Configuration](http://gregfranko.com/blog/require-dot-js-2-dot-0-shim-configuration/ "RequireJS / Backbone shim Configuration") - Not the best example, but...
 
 
 License
