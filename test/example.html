@@ -1,0 +1,42 @@
+<!DOCTYPE>
+<html>
+<head>
+	<script type="text/javascript" src="../lib/sinon.js"></script>
+	<script type="text/javascript" src="../lib/chai.js"></script>
+	<script type="text/javascript" src="../lib/mocha.js"></script>
+	<script type="text/javascript" src="../lib/require.js"></script>
+	<script type="text/javascript">
+	/**
+	 * configure require here, in hopes of only configuring once.
+	 */
+	require.config({
+		'basePath': '../',
+		'baseUrl': '../'
+	});
+	</script>
+	<!-- 
+	  Directly include config file to avoid nested requires
+	  each time a resource is required (1 to get the paths
+	  and a second time to actually require the desired file).
+	-->
+	<script type="text/javascript" src="../config.js"></script>
+	<script type="text/javascript">
+	mocha.setup('bdd');
+	</script>
+	<link rel="stylesheet" href="../css/mocha.css"></script>
+</head>
+</html>
+<body>
+	<div id="mocha"></div>
+	<!-- Include the actual tests. -->
+	<script type="text/javascript" src="example.test.js"></script>
+
+	<script type="text/javascript">
+	if (!window.PHANTOMJS) {
+		// Don't run if PHANTOMJS.
+		mocha.run();
+	}
+	</script>
+
+</body>
+</html>
