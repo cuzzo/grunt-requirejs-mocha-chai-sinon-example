@@ -26,6 +26,7 @@ Configuration Examples
 module.exports = function(grunt) {
   grunt.initConfig({
     mocha: {
+      // Test all files ending in .html anywhere inside the test directory.
       browser: ['test/**/*.html'],
       options: {
         reporter: 'Nyan', // Duh!

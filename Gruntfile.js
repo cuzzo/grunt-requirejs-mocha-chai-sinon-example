@@ -7,6 +7,7 @@ module.exports = function(grunt) {
       }
     },
     mocha: {
+      // Test all files ending in .html anywhere inside the test directory.
       browser: ['test/**/*.html'],
       options: {
         reporter: 'Nyan', // Duh!
