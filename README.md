@@ -1,7 +1,7 @@
 grunt-requirejs-mocha-chai-sinon-example
 ========================================
 
-An example using Mocha in combination with RequireJS and Grunt (alongside Chai and Sinon.JS).
+An example using Mocha in combination with RequireJS / require.js and Grunt (alongside Chai and Sinon.JS).
 
 
 Usage
