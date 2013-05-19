@@ -1,7 +1,7 @@
 grunt-requirejs-mocha-chai-sinon-example
 ========================================
 
-An example using Mocha in combination with RequireJS and Grunt.js (alongside Chai and Sinon.JS).
+An example using Mocha in combination with RequireJS and Grunt (alongside Chai and Sinon.JS).
 
 
 Usage
@@ -57,7 +57,7 @@ module.exports = function(grunt) {
 };
 ```
 
-This assumes that your require.js configuration is in the same directory as your Gruntfile (which it is for this example, but may not be in your case).
+This assumes that your RequireJS configuration is in the same directory as your Gruntfile (which it is for this example, but may not be in your case).
 
 
 #### Putting It Together:
@@ -89,7 +89,7 @@ module.exports = function(grunt) {
 
 ### [package.json](https://github.com/isaacs/npm/blob/master/doc/cli/json.md "Detailed package.json Documentation") Configuration
 
-This example uses Grunt, require.js, Mocha, Chai, and Sinon.JS--and is, therefore, dependent upon them.
+This example uses Grunt, RequireJS, Mocha, Chai, and Sinon.JS--and is, therefore, dependent upon them.
 
 It's good practice to put your projects dependencies inside a package.json file (that makes it easy to fetch all the dependencies with a simple ```npm install``` command).
 
@@ -196,7 +196,7 @@ For this simple example, the path directory is:
   `-src/         # Directory containing the source code of the application (which is a single file: "add-one.js").
   `-test/        # Directory containing the test code.
   `-config.js    # RequireJS configuration file.
-  `-Gruntfile.js # Grunt.js configuration file.
+  `-Gruntfile.js # Grunt configuration file.
   `-license.txt  # License to hack.
   `-package.json # package configuratoin file.
   `-README.md    # This lovely file.
