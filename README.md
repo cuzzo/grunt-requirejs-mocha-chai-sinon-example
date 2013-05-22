@@ -107,7 +107,8 @@ It's good practice to put your projects dependencies inside a package.json file 
   },  
   "devDependencies": {
     "grunt": "~0.4.1",
-    "grunt-cli": "~0.1.7"
+    "grunt-cli": "~0.1.7",
+    "grunt-mocha": "~0.3.1"
   }
 }
 ```
