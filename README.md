@@ -161,6 +161,8 @@ describe('addOne Test', function() {
      'add-one'
    ], function(AddOne) {
      chai.assert.equal(AddOne.addOne(1), 2);
+     
+     done();
    });
  });
 });
