@@ -150,10 +150,6 @@ It's good practice to put your projects dependencies inside a package.json file 
   "devDependencies": {
     "underscore": "~1.5.2",
     "requirejs": "~2.1.4",
-    "sinon": "~1.6.0",
-    "chai": "~1.6.0",
-    "mocha": "~1.9.0",
-
     "grunt": "~0.4.1",
     "grunt-cli": "~0.1.7",
     "grunt-contrib-requirejs": "~0.4.1",
@@ -284,7 +280,6 @@ For this simple example, the path directory is:
 ```
 `-repo/            # Repository of all code.
   `-css/           # Directory containing css / stylesheets.
-  `-lib/           # Directory containing third-party libraries (Chai, Mocha, RequireJS, and Sinon.JS).
   `-src/           # Directory containing the source code of the application (which is a single file: "add-one.js").
   `-test/          # Directory containing the test code.
   `-config.js      # RequireJS configuration file.
@@ -304,6 +299,10 @@ Dependencies
 
 If you don't have Node or npm installed, the above link should be easy to follow.
 
+[Bower](https://github.com/bower/bower#installing-bower "Bower Installation Guide")
+
+If you don't have Bower installed, the above link should be easy to follow.
+
 Getting Started
 ---------------
 
@@ -317,7 +316,10 @@ git clone https://github.com/cuzzo/grunt-requirejs-mocha-chai-sinon-example.git
 
 ```bash
 npm install
+bower install
 ```
+
+```npm install``` will install the node.js dependencies--the ones you will use to, among other things, run Mocha tests on your code. ```bower install``` will install the dependencies for the client--the ones that run inside the user's browser.
 
 3: Run the tests!
 
@@ -357,6 +359,11 @@ Other Resources
 * [Sinon Examples](http://sinonjs.org/docs/ "Sinon Documentation - "Mocks and Stubs and Spies, oh my!") - Use cases for Sinon (and why you might want to consider using it, if you're not already).
 * [Mocha Examples](http://visionmedia.github.io/mocha/#getting-started "Getting Started with Mocha.js") - Unit tests example with Mocha (and why you might want to consider it, if you're using something else).
 * [RequireJS / Backbone Configuration](http://gregfranko.com/blog/require-dot-js-2-dot-0-shim-configuration/ "RequireJS / Backbone shim Configuration") - Not the best example, but...
+
+Acknowledgements
+----------------
+
+* [Mocha-AMD-Example](https://github.com/netdance/Mocha-AMD-example) - Special thanks to Jim Driscoll for his fork, and suggestion to use Bower. Check out his fork, he's taking it to some interesting places, to the next level. 
 
 License
 -------

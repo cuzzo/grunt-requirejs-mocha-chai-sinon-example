@@ -1,0 +1,25 @@
+{
+  "name": "grunt-requirejs-mocha-chai-sinon-example",
+  "version": "0.0.1",
+  "hompage": "https://github.com/cuzzo/grunt-requirejs-mocha-chai-sinon-example",
+  "authors": [
+    "Cuzzo Yahn <yahn007@outlook.com>"
+  ],
+  "description": "Test setup for RequireJS and Mocha.",
+  "license": "BSD",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test"
+  ],
+  "devDependencies": {
+    "chai": "~1.8.1",
+    "mocha": "~1.15.1",
+    "sinonjs": "~1.7.3"
+  },
+  "dependencies": {
+    "requirejs": "~2.1.9"
+  }
+}

@@ -6,14 +6,10 @@
   "devDependencies": {
     "underscore": "~1.5.2",
     "requirejs": "~2.1.4",
-    "sinon": "~1.6.0",
-    "chai": "~1.6.0",
-    "mocha": "~1.9.0",
-
     "grunt": "~0.4.1",
     "grunt-cli": "~0.1.7",
     "grunt-contrib-requirejs": "~0.4.1",
     "grunt-lib-phantomjs": "~0.3",
-    "grunt-mocha": "~0.3.1"
+    "grunt-mocha": "~0.4.7"
   }
 }
