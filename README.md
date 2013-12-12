@@ -43,7 +43,7 @@ module.exports = function(grunt) {
 
 In this example, tests are stored in a ```test``` directory relative to the Gruntfile. 
 
-You can also run tasks individually with a more robust [Custom Grunt Task](#custom-mocha-task)
+You can also run tasks individually with a more robust [Custom Grunt Task](#custom-mocha-task).
 
 ### [package.json](https://github.com/isaacs/npm/blob/master/doc/cli/json.md "Detailed package.json Documentation") Configuration
 
