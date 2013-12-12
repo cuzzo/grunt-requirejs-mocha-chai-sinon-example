@@ -10,7 +10,7 @@ module.exports = function(grunt) {
       // Test all files ending in .html anywhere inside the test directory.
       browser: ['test/**/*.html'],
       options: {
-        reporter: 'Nyan', // Duh!
+        reporter: 'Spec', 
         run: true
       }
     }
@@ -18,7 +18,9 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-mocha');
 
-  grunt.registerTask('test', ['mocha']);
+  grunt.registerTask('test', [
+    'mocha'
+  ]);
   grunt.registerTask('default', [
     'test'
   ]);
