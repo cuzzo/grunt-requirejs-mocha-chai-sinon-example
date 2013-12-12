@@ -72,7 +72,7 @@ module.exports = function(grunt) {
           optimize: 'uglify2',
           optimizeAllPluginResources: true,
           preserveLicenseComments: false
-	})
+        })
       }
     }
   });
@@ -84,7 +84,6 @@ module.exports = function(grunt) {
 ```
 
 This assumes that your RequireJS configuration is in the same directory as your Gruntfile (which it is for this example, but may not be in your case).
-
 
 #### Putting It Together:
 
@@ -116,7 +115,7 @@ module.exports = function(grunt) {
           optimize: 'uglify2',
           optimizeAllPluginResources: true,
           preserveLicenseComments: false
-	})
+        })
       }
     },
     mocha: {
@@ -136,13 +135,11 @@ module.exports = function(grunt) {
 };
 ```
 
-
 ### [package.json](https://github.com/isaacs/npm/blob/master/doc/cli/json.md "Detailed package.json Documentation") Configuration
 
 This example uses Grunt, RequireJS, Mocha, Chai, and Sinon.JS--and is, therefore, dependent upon them.
 
 It's good practice to put your projects dependencies inside a package.json file (that makes it easy to fetch all the dependencies with a simple ```npm install``` command).
-
 
 ```javascript
 {
@@ -163,8 +160,22 @@ It's good practice to put your projects dependencies inside a package.json file 
 }
 ```
 
-
 ### [RequireJS Config File](http://requirejs.org/docs/api.html#config "RequireJS Config File Documentation") Example
+
+For simplicity, for this example, config.js could be:
+
+```javascript
+require.config({
+  'paths': {
+    // src
+    'add-one': 'src/add-one'
+  }
+};
+```
+
+The important part is the call to ```require.config()``` or ```define()```. 
+
+The RequireJS config dictionary can be stored in a ```Config``` variable. Later, it can be exported either AMD-like (for RequireJS) or CommonJS-like (for node). E.G.:
 
 ```javascript
 (function() {
@@ -204,19 +215,6 @@ It's good practice to put your projects dependencies inside a package.json file 
 })();
 ```
 
-The important part is the call to require.config() or define(). The requirejs config dictionary is stored in ```Config```. Later, it exported either AMD-like (for RequireJS) or CommonJS-like (for node).
-
-For simplicity, for this example, config.js could be:
-
-```javascript
-require.config({
-  'paths': {
-    // src
-    'add-one': 'src/add-one'
-  }
-};
-```
-
 In this example, there's only one JS file to the "application".  With this config file, the add-one.js code can be accessed like so:
 
 ```javascript
@@ -224,7 +222,6 @@ require(['add-one'], function(AddOne) {
   var three = AddOne.addOne(2);
 });
 ```
-
 
 Testing Example
 ---------------
@@ -274,8 +271,6 @@ describe('addOne Test', function() {
 
 ```sinon.stub().returns()``` allows you to override a function and force it to return whatever you want.  In this example, it returns 42.
 
-
-
 Application Structure
 ---------------------
 
@@ -299,16 +294,12 @@ For this simple example, the path directory is:
   `-README.md      # This lovely file.
 ```
 
-
-
 Dependencies
 ------------
 
 [Node & npm](https://github.com/joyent/node/wiki/Installation "Node Installation Guide")
 
 If you don't have Node or npm installed, the above link should be easy to follow.
-
-
 
 Getting Started
 ---------------
@@ -356,7 +347,6 @@ Done, without errors.
 
 you messed something up (somehow).
 
-
 Other Resources
 ---------------
 * [grunt-mocha](https://github.com/kmiyashiro/grunt-mocha "An Example of Running Mocha Tests with Grunt") - Most helpful resource that I found while trying to tie these libraries together.
@@ -364,7 +354,6 @@ Other Resources
 * [Sinon Examples](http://sinonjs.org/docs/ "Sinon Documentation - "Mocks and Stubs and Spies, oh my!") - Use cases for Sinon (and why you might want to consider using it, if you're not already).
 * [Mocha Examples](http://visionmedia.github.io/mocha/#getting-started "Getting Started with Mocha.js") - Unit tests example with Mocha (and why you might want to consider it, if you're using something else).
 * [RequireJS / Backbone Configuration](http://gregfranko.com/blog/require-dot-js-2-dot-0-shim-configuration/ "RequireJS / Backbone shim Configuration") - Not the best example, but...
-
 
 License
 -------
