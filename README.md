@@ -192,16 +192,19 @@ The point of tying all of these libraries together is to help assuage the pain o
 For this simple example, the path directory is:
 
 ```
-`-repo/          # Repository of all code.
-  `-css/         # Directory containing css / stylesheets.
-  `-lib/         # Directory containing third-party libraries (Chai, Mocha, RequireJS, and Sinon.JS).
-  `-src/         # Directory containing the source code of the application (which is a single file: "add-one.js").
-  `-test/        # Directory containing the test code.
-  `-config.js    # RequireJS configuration file.
-  `-Gruntfile.js # Grunt configuration file.
-  `-license.txt  # License to hack.
-  `-package.json # package configuratoin file.
-  `-README.md    # This lovely file.
+`-repo/            # Repository of all code.
+  `-css/           # Directory containing css / stylesheets.
+  `-lib/           # Directory containing third-party libraries (Chai, Mocha, RequireJS, and Sinon.JS).
+  `-src/           # Directory containing the source code of the application (which is a single file: "add-one.js").
+  `-test/          # Directory containing the test code.
+  `-config.js      # RequireJS configuration file.
+  `-Gruntfile.js   # Grunt configuration file.
+  `-license.txt    # License to hack.
+  `-main.js        # Example RequireJS main file (your project's main file).
+  `-main.dev.html  # Example of using RequireJS without a distributable (for development).
+  `-main.dist.html # Example of using RequireJS with distributable (for production).
+  `-package.json   # package configuratoin file.
+  `-README.md      # This lovely file.
 ```
 
 
