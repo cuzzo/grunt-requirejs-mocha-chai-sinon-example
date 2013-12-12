@@ -1,0 +1,27 @@
+{
+  "name": "grunt-requirejs-mocha-chai-sinon-example",
+  "version": "0.0.0",
+  "homepage": "https://github.com/netdance/grunt-requirejs-mocha-chai-sinon-example",
+  "authors": [
+    "Jim Driscoll <jamesgdriscoll@gmail.com>"
+  ],
+  "description": "Test setup for require and mocha",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "chai": "~1.8.1",
+    "mocha": "~1.15.1",
+    "sinonjs": "~1.7.3",
+    "squire": "*"
+  },
+  "dependencies": {
+    "requirejs": "~2.1.9"
+  }
+}

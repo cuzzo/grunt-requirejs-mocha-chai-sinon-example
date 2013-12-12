@@ -1,17 +1,17 @@
-grunt-requirejs-mocha-chai-sinon-example
+Mocha AMD example
 ========================================
 
-An example using Mocha in combination with RequireJS / require.js and Grunt (alongside Chai and Sinon.JS).
+An example using Mocha in combination with RequireJS / require.js and Grunt (alongside Chai and Sinon.JS, and Squire.js).
 
 
 Usage
 -----
 
-grunt-requirejs-mocha-chai-sinon-example has one usage: to demonstrate how to use a bunch of awesome javascript libraries in combination.
+Mocha AMD example has one usage: to demonstrate how to use a bunch of awesome javascript libraries in combination.
 
 Why is this helpful?  It's pretty tricky to figure it out on your own (or at least it was for me).  So, hopefully, this will be of some help to someone struggling to put this group of libraries together.
 
-grunt-requirejs-mocha-chai-sinon-example is purposefully lightweight.  There's no example demonstrating how to tie in Backbone.  But, if you're that far in the game, figuring out that piece should be trivial (I hope xD).
+Mocha AMD example is purposefully lightweight.  There's no example demonstrating how to tie in Backbone.  But, if you're that far in the game, figuring out that piece should be trivial (I hope xD).
 
 
 
@@ -210,8 +210,9 @@ Dependencies
 ------------
 
 [Node & npm](https://github.com/joyent/node/wiki/Installation "Node Installation Guide")
+[bower](http://bower.io  "Bower home page") 
 
-If you don't have Node or npm installed, the above link should be easy to follow.
+If you don't have Node or npm installed, the above link should be easy to follow.  Bower installs easily with npm.
 
 
 
@@ -228,6 +229,7 @@ git clone https://github.com/cuzzo/grunt-requirejs-mocha-chai-sinon-example.git
 
 ```bash
 npm install
+bower install
 ```
 
 3: Run the tests!
@@ -268,3 +270,5 @@ License
 -------
 
 grunt-requirejs-mocha-chai-sinon-example is free--as in BSD. Hack your heart out, hackers.
+
+This code was origninally started in cuzzo/grunt-requirejs-mocha-chai-sinon-example - and I'm deeply indebted to him for the clarity of his example.  Hopefully I didn't complicated it too much.
