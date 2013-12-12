@@ -41,54 +41,9 @@ module.exports = function(grunt) {
 };
 ```
 
-In this example, tests are stored in a ```test``` directory relative to the Gruntfile. To get fancy and allow individual tests to be run by name, you can do something like:
+In this example, tests are stored in a ```test``` directory relative to the Gruntfile. 
 
-```javascript
-module.exports = function(grunt) {
-  grunt.initConfig({
-    mocha: {
-      options: {
-        reporter: 'Nyan', // Duh!
-        run: true
-      }
-    }
-  });
-
-  grunt.registerTask('test', 'Run Mocha tests.', function() {
-    // If not --test option is specified, run all tests.
-    var test_case = grunt.option('test') || '**/*';
-
-    grunt.config.set('mocha.browser', ['test/' + test_case + '.html']);
-    grunt.task.run('mocha');
-  });
-});
-```
-
-In the above, a custom task ```test``` is registered by the ```test```. Therefore, when ```./node_modules/grunt-cli/bin/grunt test``` is run from the CLI, the function registered at task ```test``` is run. That function being:
-
-```javascript
-    // If not --test option is specified, run all tests.
-    var test_case = grunt.option('test') || '**/*';
-
-    grunt.config.set('mocha.browser', ['test/' + test_case + '.html']);
-    grunt.task.run('mocha');
-```
-
-Which just checks the command line for a ```test``` option, configuring the standard Mocha task to use either the CLI supplied test or the default glob ```**/*``` for all tests. Then, it simply runs the standard Mocha task (which comes from ```grunt.loadNpmTasks('grunt-mocha');```). 
-.
-
-So, if for example, there were two tests (```./test/test1.html``` and ```./test/test2.html```), you can run the commands:
-
-```bash
-./node_modules/grunt-cli/bin/grunt test --test=test1
-./node_modules/grunt-cli/bin/grunt test --test=test2
-```
-
-The above command would run each test indivdually. Alternatively, to run all the tests, you just run the default test command:
-
-```bash
-./node_modules/grunt-cli/bin/grunt test
-```
+You can also run tasks individually with a more robust [Custom Grunt Task](#custom-grunt-task)
 
 #### RequireJS Configuration for Your Gruntfile:
 
@@ -166,7 +121,6 @@ module.exports = function(grunt) {
       }
     },
     mocha: {
-      browser: ['test/**/*.html'],
       options: {
         reporter: 'Nyan', // Duh!
         run: true
@@ -177,7 +131,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-mocha');
   grunt.loadNpmTasks('grunt-contrib-requirejs');
 
-  grunt.registerTask('test', ['mocha']);
+  grunt.registerTask('test', 'Run Mocha tests.', function() {
+    // If not --test option is specified, run all tests.
+    var test_case = grunt.option('test') || '**/*';
+
+    grunt.config.set('mocha.browser', ['test/' + test_case + '.html']);
+    grunt.task.run('mocha');
+  });
   grunt.registerTask('dist', ['requirejs']);
 };
 ```
@@ -397,11 +357,67 @@ you messed something up (somehow).
 
 5: Check ```./example/main.dev.html``` and ```./example/main.dist.html``` for "2" in the Console's log. That means it worked.
 
+Getting Fancy
+-------------
+
+### Custom Mocha Task
+
+To allow individual tests to be run by name, you can do something like:
+
+```javascript
+module.exports = function(grunt) {
+  grunt.initConfig({
+    mocha: {
+      options: {
+        reporter: 'Nyan', // Duh!
+        run: true
+      }
+    }
+  });
+
+  grunt.registerTask('test', 'Run Mocha tests.', function() {
+    // If not --test option is specified, run all tests.
+    var test_case = grunt.option('test') || '**/*';
+
+    grunt.config.set('mocha.browser', ['test/' + test_case + '.html']);
+    grunt.task.run('mocha');
+  });
+});
+```
+
+In the above, a custom task ```test``` is registered by the name "test". Therefore, when ```./node_modules/grunt-cli/bin/grunt test``` is run from the CLI, the function registered at task "test" is run. That function being:
+
+```javascript
+// If not --test option is specified, run all tests.
+var test_case = grunt.option('test') || '**/*';
+
+grunt.config.set('mocha.browser', ['test/' + test_case + '.html']);
+grunt.task.run('mocha');
+```
+
+Which just checks the command line for a "test" option, configuring the standard Mocha task to use either the CLI supplied test or the default glob "**/*" for all tests. Then, it simply runs the standard Mocha task (which comes from ```grunt.loadNpmTasks('grunt-mocha');```). 
+.
+
+So, if for example, there were two tests (```./test/test1.html``` and ```./test/test2.html```), you can run the commands:
+
+```bash
+./node_modules/grunt-cli/bin/grunt test --test=test1
+./node_modules/grunt-cli/bin/grunt test --test=test2
+```
+
+The above command would run each test indivdually. Alternatively, to run all the tests, you just run the default test command:
+
+```bash
+./node_modules/grunt-cli/bin/grunt test
+```
+
+Grunt's [Task Runner Documentation](http://gruntjs.com/api/grunt.task "The Gurnt Task Runner Guide") explains how to register tasks and whatnot in more depth. Check it out if you're scratching your head.
+
 Other Resources
 ---------------
 * [grunt-mocha](https://github.com/kmiyashiro/grunt-mocha "An Example of Running Mocha Tests with Grunt") - Most helpful resource that I found while trying to tie these libraries together.
 * [Grunt Guide](http://gruntjs.com/getting-started "Getting Started with Grunt") - Grunt's documentation (in case you have any troubles with grunt or grunt-cli).
-* [Sinon Examples](http://sinonjs.org/docs/ "Sinon Documentation - "Mocks and Stubs and Spies, oh my!") - Use cases for Sinon (and why you might want to consider using it, if you're not already).
+* [Sinon Examples](http://sinonjs.org/docs/ "Sinon Documentation - Mocks and Stubs and Spies, oh my!") - Use cases for Sinon (and why you might want to consider using it, if you're not already).
 * [Mocha Examples](http://visionmedia.github.io/mocha/#getting-started "Getting Started with Mocha.js") - Unit tests example with Mocha (and why you might want to consider it, if you're using something else).
 * [RequireJS / Backbone Configuration](http://gregfranko.com/blog/require-dot-js-2-dot-0-shim-configuration/ "RequireJS / Backbone shim Configuration") - Not the best example, but...
 
