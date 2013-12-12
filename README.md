@@ -46,14 +46,40 @@ In this example, tests are stored in a ```test``` directory relative to the Grun
 #### RequireJS Configuration for Your Gruntfile:
 
 ```javascript
+var _ = require('underscore')._;
+var RJSConfig = require('./config');
+
 module.exports = function(grunt) {
+  // Add require.js to the paths.
+  RJSConfig.paths = _.extend(RJSConfig.paths, {
+    'require-lib': 'node_modules/requirejs/require'
+  });
+
+  // Include EVERY path in the distributable.
+  RJSConfig.include = [];
+  _.each(RJSConfig.paths, function(path, key) {
+    RJSConfig.include.push(key);
+  });
+
   grunt.initConfig({
     requirejs: {
-      options: {
-        baseUrl: '.'
+      compile: {
+        options: _.extend(RJSConfig, {
+          name: 'main',
+          out: 'dist/my-proj.js',
+          baseUrl: './',
+          generateSourceMaps: true,
+          optimize: 'uglify2',
+          optimizeAllPluginResources: true,
+          preserveLicenseComments: false
+	})
       }
     }
   });
+
+  grunt.loadNpmTasks('grunt-contrib-requirejs');
+
+  grunt.registerTask('dist', ['requirejs']);
 };
 ```
 
@@ -63,14 +89,36 @@ This assumes that your RequireJS configuration is in the same directory as your 
 #### Putting It Together:
 
 ```javascript
+var _ = require('underscore')._;
+var RJSConfig = require('./config');
+
 module.exports = function(grunt) {
+  // Add require.js to the paths.
+  RJSConfig.paths = _.extend(RJSConfig.paths, {
+    'require-lib': 'node_modules/requirejs/require'
+  });
+
+  // Include EVERY path in the distributable.
+  RJSConfig.include = [];
+  _.each(RJSConfig.paths, function(path, key) {
+    RJSConfig.include.push(key);
+  });
+
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     requirejs: {
-      options: {
-        baseUrl: '.' 
-      }   
-    },  
+      compile: {
+        options: _.extend(RJSConfig, {
+          name: 'main',
+          out: 'dist/my-proj.js',
+          baseUrl: './',
+          generateSourceMaps: true,
+          optimize: 'uglify2',
+          optimizeAllPluginResources: true,
+          preserveLicenseComments: false
+	})
+      }
+    },
     mocha: {
       browser: ['test/**/*.html'],
       options: {
@@ -81,8 +129,10 @@ module.exports = function(grunt) {
   }); 
 
   grunt.loadNpmTasks('grunt-mocha');
+  grunt.loadNpmTasks('grunt-contrib-requirejs');
 
   grunt.registerTask('test', ['mocha']);
+  grunt.registerTask('dist', ['requirejs']);
 };
 ```
 
@@ -117,17 +167,59 @@ It's good practice to put your projects dependencies inside a package.json file 
 ### [RequireJS Config File](http://requirejs.org/docs/api.html#config "RequireJS Config File Documentation") Example
 
 ```javascript
+(function() {
+  // This is ultimately fed to require.config().
+  var Config = {
+    'paths': {
+      'config': 'config',
+
+      // src
+      'add-one': 'src/add-one'
+    }
+  };
+
+  // If _TEST_MODE, configre to '../' since our tests are stored in './test/'.
+  if (typeof _TEST_MODE !== 'undefined' && _TEST_MODE === true) {
+    Config.baseUrl = '../';
+    require.config(Config);
+    return true;
+  }
+
+  // if 'define' exists as a function, AMD.
+  if (typeof define === 'function') {
+    define([], function() {
+      return Config;
+    });
+  }
+  // if module exists as an object, node CommonJS.
+  if (typeof module === 'object') {
+    module.exports = Config;
+  }
+  // if exports exists as an object, CommonJS.
+  if (typeof exports === 'object') {
+    exports.RJSConfig = Config;
+  }
+
+  return Config;
+})();
+```
+
+The important part is the call to require.config() or define(). The requirejs config dictionary is stored in ```Config```. Later, it exported either AMD-like (for RequireJS) or CommonJS-like (for node).
+
+For simplicity, for this example, config.js could be:
+
+```javascript
 require.config({
   'paths': {
     // src
     'add-one': 'src/add-one'
   }
-});
+};
 ```
 
 In this example, there's only one JS file to the "application".  With this config file, the add-one.js code can be accessed like so:
 
-```
+```javascript
 require(['add-one'], function(AddOne) {
   var three = AddOne.addOne(2);
 });
