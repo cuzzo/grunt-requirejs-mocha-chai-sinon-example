@@ -344,9 +344,9 @@ module.exports = function(grunt) {
     requirejs: {
       compile: {
         options: _.extend(RJSConfig, {
-          name: 'main',
+          name: 'config',
           out: 'dist/my-proj.js',
-          baseUrl: './',
+          baseUrl: './src',
           generateSourceMaps: true,
           optimize: 'uglify2',
           optimizeAllPluginResources: true,
@@ -362,7 +362,7 @@ module.exports = function(grunt) {
 };
 ```
 
-This assumes that your RequireJS configuration is in the same directory as your Gruntfile (which it is for this example, but may not be in your case).
+This assumes that your RequireJS configuration is in directory ```src``` relative to your Gruntfile (which it is for this example, but may not be in your case). Notice the ```requirejs.compile.options``` set to "./src".
 
 ### Putting it Together
 
@@ -389,9 +389,9 @@ module.exports = function(grunt) {
     requirejs: {
       compile: {
         options: _.extend(RJSConfig, {
-          name: 'main',
+          name: 'config',
           out: 'dist/my-proj.js',
-          baseUrl: './',
+          baseUrl: './src',
           generateSourceMaps: true,
           optimize: 'uglify2',
           optimizeAllPluginResources: true,

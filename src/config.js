@@ -2,6 +2,8 @@
   // This is ultimately fed to require.config().
   var Config = {
     'paths': {
+      'main': 'main',
+
       // src
       'add-one': 'app/add-one'
     }
