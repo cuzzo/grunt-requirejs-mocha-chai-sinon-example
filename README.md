@@ -13,8 +13,6 @@ Why is this helpful?  It's pretty tricky to figure it out on your own (or at lea
 
 grunt-requirejs-mocha-chai-sinon-example is purposefully lightweight.  There's no example demonstrating how to tie in Backbone.  But, if you're that far in the game, figuring out that piece should be trivial (I hope xD).
 
-
-
 Configuration Examples
 ----------------------
 
@@ -49,7 +47,7 @@ You can also run tasks individually with a more robust [Custom Grunt Task](#cust
 
 This example uses Grunt, RequireJS, Mocha, Chai, and Sinon.JS--and is, therefore, dependent upon them.
 
-It's good practice to put your projects dependencies inside a package.json file (that makes it easy to fetch all the dependencies with a simple ```npm install``` command).
+It's good practice to put your project's dependencies inside a ```package.json``` file (that makes it easy to fetch all the dependencies with a simple ```npm install``` command).
 
 ```javascript
 {
@@ -68,6 +66,40 @@ It's good practice to put your projects dependencies inside a package.json file 
   }
 }
 ```
+
+### [bower.json]( "Detailed bower.json Documentation") Configuration
+
+```bower.json``` is the equivalent of ```package.json``` for your client-specifc dependencies. ```package.json``` is for defining the packages used on your machine for development. ```bower.json``` is for defining the packages that will be used on the clients' machines--think jQuery.
+
+It's good practice to put your project's client-side dependencies in a ```bower.json``` file (that makes it easy to fetch all the dependencies with a simple ```bower install``` command).
+
+```javascript
+{
+  "name": "grunt-requirejs-mocha-chai-sinon-example",
+  "version": "0.0.1",
+  "hompage": "https://github.com/cuzzo/grunt-requirejs-mocha-chai-sinon-example",
+  "description": "Test setup for RequireJS and Mocha.",
+  "license": "BSD",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "example"
+  ],
+  "devDependencies": {
+    "chai": "~1.8.1",
+    "mocha": "~1.15.1",
+    "sinonjs": "~1.7.3"
+  },
+  "dependencies": {
+    "requirejs": "~2.1.9"
+  }
+}
+```
+
+[Special thanks to netdance](#acknowledgements).
 
 ### [RequireJS Config File](http://requirejs.org/docs/api.html#config "RequireJS Config File Documentation") Example
 
