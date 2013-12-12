@@ -27,6 +27,8 @@ describe('addOne Exemplary Tests', function() {
    * Instead of requiring add-one in each test--making each test async,
    * require it in beforeEach, clone it, and sneak it into a global
    * so that no test can (permanently) mess with / mutate it.
+   * Note that libraries like Lo Dash and Underscore include deep copy as well, 
+   * so you could just use that.
    */
   beforeEach(function(done) {
     require([

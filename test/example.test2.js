@@ -1,3 +1,6 @@
+// This version loads the requirements via a require block at the beginning,
+// but that means you need to be careful not to mutate your copy.
+
 require(['times-six'],function(TimesSix){
 
   describe('times-six Exemplary Tests', function() {
