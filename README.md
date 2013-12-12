@@ -179,50 +179,6 @@ require.config({
 });
 ```
 
-The important part is the call to ```require.config()``` or ```define()```. 
-
-The RequireJS config dictionary can be stored in a ```Config``` variable. Later, it can be exported either AMD-like (for RequireJS) or CommonJS-like (for node). E.G.:
-
-```javascript
-(function() {
-  // This is ultimately fed to require.config().
-  var Config = {
-    'paths': {
-      // src
-      'add-one': 'src/add-one'
-    }
-  };
-
-  // If _TEST_MODE, configre to '../' since our tests are stored in './test/'.
-  if (typeof _TEST_MODE !== 'undefined' && _TEST_MODE === true) {
-    Config.baseUrl = '../';
-    require.config(Config);
-    return true;
-  }
-
-  // if 'define' exists as a function, AMD.
-  if (typeof define === 'function') {
-    require.config(Config);
-    require([
-      'main'
-    ], function(Main) {
-      Main.main();
-    });
-    return true;
-  }
-  // if module exists as an object, node CommonJS.
-  if (typeof module === 'object') {
-    module.exports = Config;
-  }
-  // if exports exists as an object, CommonJS.
-  if (typeof exports === 'object') {
-    exports.RJSConfig = Config;
-  }
-
-  return Config;
-})();
-```
-
 In this example, there's only one JS file to the "application".  With this config file, the add-one.js code can be accessed like so:
 
 ```javascript
@@ -230,6 +186,8 @@ require(['add-one'], function(AddOne) {
   var three = AddOne.addOne(2);
 });
 ```
+
+But, in reality, you'll want a [more advanced RequireJS Config file](#multipurpose-reusable-requirejs-config-file). This will allow you to have one configuration file for building, testing, development, and production.
 
 Testing Example
 ---------------
@@ -412,6 +370,53 @@ The above command would run each test indivdually. Alternatively, to run all the
 ```
 
 Grunt's [Task Runner Documentation](http://gruntjs.com/api/grunt.task "The Gurnt Task Runner Guide") explains how to register tasks and whatnot in more depth. Check it out if you're scratching your head.
+
+### Multipurpose Reusable RequireJS Config File
+
+If you immediately run Config, you can't modify or easily access the RequireJS configuration from other files.
+
+Therefore, it's better to store the RequireJS config dictionary in a ```Config``` variable. Later, it can be exported either AMD-like (for RequireJS) or CommonJS-like (for node). E.G.:
+
+```javascript
+(function() {
+  // This is ultimately fed to require.config().
+  var Config = {
+    'paths': {
+      // src
+      'add-one': 'src/add-one'
+    }
+  };
+
+  // If _TEST_MODE, configre to '../' since our tests are stored in './test/'.
+  if (typeof _TEST_MODE !== 'undefined' && _TEST_MODE === true) {
+    Config.baseUrl = '../src/';
+    require.config(Config);
+    return true;
+  }
+
+  // If 'define' exists as a function, run main.
+  if (typeof define === 'function') {
+    require.config(Config);
+    require([
+      'main'
+    ], function(Main) {
+      Main.main();
+    });
+    return true;
+  }
+  // If exports exists as an object, CommonJS.
+  if (typeof module === 'object') {
+    module.exports = Config;
+  }
+  // If module exists as an object, use CommonJS-like module exports for node.
+  if (typeof exports === 'object') {
+    exports.RJSConfig = Config;
+  }
+
+  return Config;
+})();
+```
+
 
 Other Resources
 ---------------

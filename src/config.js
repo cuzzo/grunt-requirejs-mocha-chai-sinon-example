@@ -14,7 +14,7 @@
     return true;
   }
 
-  // if 'define' exists as a function, AMD.
+  // If 'define' exists as a function, run main.
   if (typeof define === 'function') {
     require.config(Config);
     require([
@@ -24,11 +24,11 @@
     });
     return true;
   }
-  // if module exists as an object, node CommonJS.
+  // If exports exists as an object, CommonJS.
   if (typeof module === 'object') {
     module.exports = Config;
   }
-  // if exports exists as an object, CommonJS.
+  // If module exists as an object, use CommonJS-like module exports for node.
   if (typeof exports === 'object') {
     exports.RJSConfig = Config;
   }
