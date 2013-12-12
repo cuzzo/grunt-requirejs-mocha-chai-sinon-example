@@ -18,7 +18,7 @@ module.exports = function(grunt) {
     requirejs: {
       compile: {
         options: _.extend(RJSConfig, {
-          name: 'main',
+          name: 'config',
           out: 'dist/my-proj.js',
           baseUrl: './',
           generateSourceMaps: true,

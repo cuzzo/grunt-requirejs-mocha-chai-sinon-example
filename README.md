@@ -181,8 +181,6 @@ The RequireJS config dictionary can be stored in a ```Config``` variable. Later,
   // This is ultimately fed to require.config().
   var Config = {
     'paths': {
-      'config': 'config',
-
       // src
       'add-one': 'src/add-one'
     }
@@ -197,9 +195,13 @@ The RequireJS config dictionary can be stored in a ```Config``` variable. Later,
 
   // if 'define' exists as a function, AMD.
   if (typeof define === 'function') {
-    define([], function() {
-      return Config;
+    require.config(Config);
+    require([
+      'main'
+    ], function(Main) {
+      Main.main();
     });
+    return true;
   }
   // if module exists as an object, node CommonJS.
   if (typeof module === 'object') {
