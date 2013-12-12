@@ -322,13 +322,6 @@ npm install
 ./node_modules/grunt-cli/bin/grunt test
 ```
 
-4: Build distributable with RequireJS and Grunt.
-```bash
-./node_modules/grunt-cli/bin/grunt dist
-```
-
-5: Check ```main.dev.html``` and ```main.dist.html``` for "2" in the Console's log.
-
 If you don't see something like:
 
 ```
@@ -346,6 +339,13 @@ Done, without errors.
 ```
 
 you messed something up (somehow).
+
+4: If you succeeded, build the distributable with RequireJS and Grunt.
+```bash
+./node_modules/grunt-cli/bin/grunt dist
+```
+
+5: Check ```main.dev.html``` and ```main.dist.html``` for "2" in the Console's log. That means it worked.
 
 Other Resources
 ---------------
