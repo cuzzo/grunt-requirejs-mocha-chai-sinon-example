@@ -42,4 +42,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-requirejs');
 
   grunt.registerTask('test', ['mocha']);
+  grunt.registerTask('dist', ['requirejs']);
 };
