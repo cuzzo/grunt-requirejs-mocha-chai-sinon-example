@@ -16,9 +16,7 @@ grunt-requirejs-mocha-chai-sinon-example is purposefully lightweight.  There's n
 Configuration Examples
 ----------------------
 
-### [Gruntfile](http://gruntjs.com/sample-gruntfile "An Example Gruntfile") Configuration Example
-
-#### Mocha Configuration for Your Gruntfile:
+### Mocha Configuration for Your [Gruntfile](http://gruntjs.com/sample-gruntfile "An Example Gruntfile")
 
 ```javascript
 module.exports = function(grunt) {
