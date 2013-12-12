@@ -45,103 +45,6 @@ In this example, tests are stored in a ```test``` directory relative to the Grun
 
 You can also run tasks individually with a more robust [Custom Grunt Task](#custom-mocha-task)
 
-#### RequireJS Configuration for Your Gruntfile:
-
-```javascript
-var _ = require('underscore')._;
-var RJSConfig = require('./config');
-
-module.exports = function(grunt) {
-  // Add require.js to the paths.
-  RJSConfig.paths = _.extend(RJSConfig.paths, {
-    'require-lib': 'node_modules/requirejs/require'
-  });
-
-  // Include EVERY path in the distributable.
-  RJSConfig.include = [];
-  _.each(RJSConfig.paths, function(path, key) {
-    RJSConfig.include.push(key);
-  });
-
-  grunt.initConfig({
-    requirejs: {
-      compile: {
-        options: _.extend(RJSConfig, {
-          name: 'main',
-          out: 'dist/my-proj.js',
-          baseUrl: './',
-          generateSourceMaps: true,
-          optimize: 'uglify2',
-          optimizeAllPluginResources: true,
-          preserveLicenseComments: false
-        })
-      }
-    }
-  });
-
-  grunt.loadNpmTasks('grunt-contrib-requirejs');
-
-  grunt.registerTask('dist', ['requirejs']);
-};
-```
-
-This assumes that your RequireJS configuration is in the same directory as your Gruntfile (which it is for this example, but may not be in your case).
-
-#### Putting It Together:
-
-```javascript
-var _ = require('underscore')._;
-var RJSConfig = require('./config');
-
-module.exports = function(grunt) {
-  // Add require.js to the paths.
-  RJSConfig.paths = _.extend(RJSConfig.paths, {
-    'require-lib': 'node_modules/requirejs/require'
-  });
-
-  // Include EVERY path in the distributable.
-  RJSConfig.include = [];
-  _.each(RJSConfig.paths, function(path, key) {
-    RJSConfig.include.push(key);
-  });
-
-  grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
-    requirejs: {
-      compile: {
-        options: _.extend(RJSConfig, {
-          name: 'main',
-          out: 'dist/my-proj.js',
-          baseUrl: './',
-          generateSourceMaps: true,
-          optimize: 'uglify2',
-          optimizeAllPluginResources: true,
-          preserveLicenseComments: false
-        })
-      }
-    },
-    mocha: {
-      options: {
-        reporter: 'Nyan', // Duh!
-        run: true
-      }   
-    }   
-  }); 
-
-  grunt.loadNpmTasks('grunt-mocha');
-  grunt.loadNpmTasks('grunt-contrib-requirejs');
-
-  grunt.registerTask('test', 'Run Mocha tests.', function() {
-    // If not --test option is specified, run all tests.
-    var test_case = grunt.option('test') || '**/*';
-
-    grunt.config.set('mocha.browser', ['test/' + test_case + '.html']);
-    grunt.task.run('mocha');
-  });
-  grunt.registerTask('dist', ['requirejs']);
-};
-```
-
 ### [package.json](https://github.com/isaacs/npm/blob/master/doc/cli/json.md "Detailed package.json Documentation") Configuration
 
 This example uses Grunt, RequireJS, Mocha, Chai, and Sinon.JS--and is, therefore, dependent upon them.
@@ -417,6 +320,106 @@ Therefore, it's better to store the RequireJS config dictionary in a ```Config``
 })();
 ```
 
+### RequireJS Configuration for Your Gruntfile
+
+So, now that you have a nice RequireJS configuration file, let's use it in Grunt to make building your distributable nice and simple.
+
+```javascript
+var _ = require('underscore')._;
+var RJSConfig = require('./src/config');
+
+module.exports = function(grunt) {
+  // Add require.js to the paths.
+  RJSConfig.paths = _.extend(RJSConfig.paths, {
+    'require-lib': '../node_modules/requirejs/require'
+  });
+
+  // Include EVERY path in the distributable.
+  RJSConfig.include = [];
+  _.each(RJSConfig.paths, function(path, key) {
+    RJSConfig.include.push(key);
+  });
+
+  grunt.initConfig({
+    requirejs: {
+      compile: {
+        options: _.extend(RJSConfig, {
+          name: 'main',
+          out: 'dist/my-proj.js',
+          baseUrl: './',
+          generateSourceMaps: true,
+          optimize: 'uglify2',
+          optimizeAllPluginResources: true,
+          preserveLicenseComments: false
+        })
+      }
+    }
+  });
+
+  grunt.loadNpmTasks('grunt-contrib-requirejs');
+
+  grunt.registerTask('dist', ['requirejs']);
+};
+```
+
+This assumes that your RequireJS configuration is in the same directory as your Gruntfile (which it is for this example, but may not be in your case).
+
+### Putting it Together
+
+To have the fancy mocha task to run tests individually by name, and to have the requirejs task to build your distributable--you'd end up with a Gruntfile like so:
+
+```javascript
+var _ = require('underscore')._;
+var RJSConfig = require('./config');
+
+module.exports = function(grunt) {
+  // Add require.js to the paths.
+  RJSConfig.paths = _.extend(RJSConfig.paths, {
+    'require-lib': '../node_modules/requirejs/require'
+  });
+
+  // Include EVERY path in the distributable.
+  RJSConfig.include = [];
+  _.each(RJSConfig.paths, function(path, key) {
+    RJSConfig.include.push(key);
+  });
+
+  grunt.initConfig({
+    pkg: grunt.file.readJSON('package.json'),
+    requirejs: {
+      compile: {
+        options: _.extend(RJSConfig, {
+          name: 'main',
+          out: 'dist/my-proj.js',
+          baseUrl: './',
+          generateSourceMaps: true,
+          optimize: 'uglify2',
+          optimizeAllPluginResources: true,
+          preserveLicenseComments: false
+        })
+      }
+    },
+    mocha: {
+      options: {
+        reporter: 'Nyan', // Duh!
+        run: true
+      }
+    }
+  });
+
+  grunt.loadNpmTasks('grunt-mocha');
+  grunt.loadNpmTasks('grunt-contrib-requirejs');
+
+  grunt.registerTask('test', 'Run Mocha tests.', function() {
+    // If not --test option is specified, run all tests.
+    var test_case = grunt.option('test') || '**/*';
+
+    grunt.config.set('mocha.browser', ['test/' + test_case + '.html']);
+    grunt.task.run('mocha');
+  });
+  grunt.registerTask('dist', ['requirejs']);
+};
+```
 
 Other Resources
 ---------------
