@@ -9,8 +9,8 @@
     "mocha": "~1.9.0"
   },
   "devDependencies": {
-    "grunt": "~0.4.1",
-    "grunt-cli": "~0.1.7",
-    "grunt-mocha": "~0.3.1"
+    "grunt": "~0.4.2",
+    "grunt-cli": "~0.1.11",
+    "grunt-mocha": "~0.4.7"
   }
 }
