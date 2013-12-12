@@ -7,7 +7,7 @@
 	<script type="text/javascript" src="../bower_components/requirejs/require.js"></script>
 	<script type="text/javascript">
 	/**
-	 * configure require here, in hopes of only configuring once.
+	 * configure require here, pointing to a TLD where we can find both tests and source
 	 */
 	require.config({
 		'basePath': '../',
@@ -15,11 +15,14 @@
 	});
 	</script>
 	<!-- 
-	  Directly include config file to avoid nested requires
-	  each time a resource is required (1 to get the paths
-	  and a second time to actually require the desired file).
+	  Include the paths used in the actual code.
 	-->
-	<script type="text/javascript" src="../config.js"></script>
+	<script type="text/javascript" src="../src/config.js"></script>
+	<!--
+	  Include test config dependencies.  Separating these out matters when you run r.js
+	-->
+	<script type="text/javascript" src="test-config.js"></script>
+
 	<script type="text/javascript">
 	mocha.setup('bdd');
 	</script>
