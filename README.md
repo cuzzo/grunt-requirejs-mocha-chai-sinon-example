@@ -228,6 +228,7 @@ git clone https://github.com/cuzzo/grunt-requirejs-mocha-chai-sinon-example.git
 
 ```bash
 npm install
+bower install
 ```
 
 3: Run the tests!
