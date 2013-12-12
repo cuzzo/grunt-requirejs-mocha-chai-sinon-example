@@ -67,7 +67,7 @@ It's good practice to put your project's dependencies inside a ```package.json``
 }
 ```
 
-### [bower.json]( "Detailed bower.json Documentation") Configuration
+### [bower.json](http://bower.io/#defining-a-package "Detailed bower.json Documentation") Configuration
 
 ```bower.json``` is the equivalent of ```package.json``` for your client-specifc dependencies. ```package.json``` is for defining the packages used on your machine for development. ```bower.json``` is for defining the packages that will be used on the clients' machines--think jQuery.
 
