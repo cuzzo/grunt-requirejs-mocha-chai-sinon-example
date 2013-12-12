@@ -210,8 +210,9 @@ Dependencies
 ------------
 
 [Node & npm](https://github.com/joyent/node/wiki/Installation "Node Installation Guide")
+[bower](http://bower.io  "Bower home page") 
 
-If you don't have Node or npm installed, the above link should be easy to follow.
+If you don't have Node or npm installed, the above link should be easy to follow.  Bower installs easily with npm.
 
 
 
