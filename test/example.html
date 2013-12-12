@@ -6,24 +6,21 @@
 	<script type="text/javascript" src="../lib/mocha.js"></script>
 	<script type="text/javascript" src="../lib/require.js"></script>
 	<script type="text/javascript">
-	/**
-	 * configure require here, in hopes of only configuring once.
-	 */
-	require.config({
-		'basePath': '../',
-		'baseUrl': '../'
-	});
+	// Set as test mode for proper configuration.
+	window._TEST_MODE = true;
+	window._BASE_URL = '../';
+	window._BASE_PATH = '../';
+
+	mocha.setup('bdd');
 	</script>
+	<link rel="stylesheet" href="../css/mocha.css" />
+
 	<!-- 
 	  Directly include config file to avoid nested requires
 	  each time a resource is required (1 to get the paths
 	  and a second time to actually require the desired file).
 	-->
 	<script type="text/javascript" src="../config.js"></script>
-	<script type="text/javascript">
-	mocha.setup('bdd');
-	</script>
-	<link rel="stylesheet" href="../css/mocha.css"></script>
 </head>
 </html>
 <body>
