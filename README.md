@@ -170,7 +170,7 @@ require.config({
     // src
     'add-one': 'src/add-one'
   }
-};
+});
 ```
 
 The important part is the call to ```require.config()``` or ```define()```. 
