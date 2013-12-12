@@ -1,6 +1,8 @@
 (function() {
   var Config = {
     'paths': {
+      'config': 'config',
+
       // src
       'add-one': 'src/add-one'
     }
