@@ -1,10 +1,10 @@
 var _ = require('underscore')._;
-var RJSConfig = require('./config');
+var RJSConfig = require('./src/config');
 
 module.exports = function(grunt) {
   // Add require.js to the paths.
   RJSConfig.paths = _.extend(RJSConfig.paths, {
-    'require-lib': 'node_modules/requirejs/require'
+    'require-lib': '../node_modules/requirejs/require'
   });
 
   // Include EVERY path in the distributable.
@@ -20,7 +20,7 @@ module.exports = function(grunt) {
         options: _.extend(RJSConfig, {
           name: 'config',
           out: 'dist/my-proj.js',
-          baseUrl: './',
+          baseUrl: './src',
           generateSourceMaps: true,
           optimize: 'uglify2',
           optimizeAllPluginResources: true,

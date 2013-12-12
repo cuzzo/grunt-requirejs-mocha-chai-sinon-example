@@ -12,7 +12,8 @@
     "**/.*",
     "node_modules",
     "bower_components",
-    "test"
+    "test",
+    "example"
   ],
   "devDependencies": {
     "chai": "~1.8.1",

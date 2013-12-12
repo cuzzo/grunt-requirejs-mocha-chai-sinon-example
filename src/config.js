@@ -3,13 +3,13 @@
   var Config = {
     'paths': {
       // src
-      'add-one': 'src/add-one'
+      'add-one': 'app/add-one'
     }
   };
 
   // If _TEST_MODE, configre to '../' since our tests are stored in './test/'.
   if (typeof _TEST_MODE !== 'undefined' && _TEST_MODE === true) {
-    Config.baseUrl = '../';
+    Config.baseUrl = '../src/';
     require.config(Config);
     return true;
   }

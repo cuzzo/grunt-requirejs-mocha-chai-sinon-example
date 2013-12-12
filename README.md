@@ -280,18 +280,19 @@ The point of tying all of these libraries together is to help assuage the pain o
 For this simple example, the path directory is:
 
 ```
-`-repo/            # Repository of all code.
-  `-css/           # Directory containing css / stylesheets.
-  `-src/           # Directory containing the source code of the application (which is a single file: "add-one.js").
-  `-test/          # Directory containing the test code.
-  `-config.js      # RequireJS configuration file.
-  `-Gruntfile.js   # Grunt configuration file.
-  `-license.txt    # License to hack.
-  `-main.js        # Example RequireJS main file (your project's main file).
-  `-main.dev.html  # Example of using RequireJS without a distributable (for development).
-  `-main.dist.html # Example of using RequireJS with distributable (for production).
-  `-package.json   # package configuratoin file.
-  `-README.md      # This lovely file.
+`-repo/              # Repository of all code.
+  `-example/         # Directory containing examplary code.
+  `-src/             # Directory containing the source code of the application. Along with an app folder, usually you would have tpl and css folders galore here.
+    `-app/           # Directory containing the application code.
+      `-add-one.js   # The add-one application code.
+    `-config.js      # RequireJS configuration file.
+    `-main.js        # Example RequireJS main file (your project's main file).
+  `-test/            # Directory containing the test code.
+  `-bower.json       # Bower configuration file.
+  `-Gruntfile.js     # Grunt configuration file.
+  `-license.txt      # License to hack.
+  `-package.json     # package configuratoin file.
+  `-README.md        # This lovely file.
 ```
 
 Dependencies
@@ -347,7 +348,7 @@ you messed something up (somehow).
 ./node_modules/grunt-cli/bin/grunt dist
 ```
 
-5: Check ```main.dev.html``` and ```main.dist.html``` for "2" in the Console's log. That means it worked.
+5: Check ```./example/main.dev.html``` and ```./example/main.dist.html``` for "2" in the Console's log. That means it worked.
 
 Other Resources
 ---------------
