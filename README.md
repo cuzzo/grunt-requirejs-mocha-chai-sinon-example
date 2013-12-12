@@ -146,15 +146,18 @@ It's good practice to put your projects dependencies inside a package.json file 
   "name": "grunt-requirejs-mocha-chai-sinon-example",
   "version": "0.0.1",
   "dependencies": {
-    "grunt-lib-phantomjs": "~0.3",
+  },
+  "devDependencies": {
+    "underscore": "~1.5.2",
     "requirejs": "~2.1.4",
     "sinon": "~1.6.0",
     "chai": "~1.6.0",
-    "mocha": "~1.9.0"
-  },  
-  "devDependencies": {
+    "mocha": "~1.9.0",
+
     "grunt": "~0.4.1",
     "grunt-cli": "~0.1.7",
+    "grunt-contrib-requirejs": "~0.4.1",
+    "grunt-lib-phantomjs": "~0.3",
     "grunt-mocha": "~0.3.1"
   }
 }
