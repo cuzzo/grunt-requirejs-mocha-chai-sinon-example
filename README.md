@@ -41,7 +41,54 @@ module.exports = function(grunt) {
 };
 ```
 
-In this example, tests are stored in a ```test``` directory relative to the Gruntfile.
+In this example, tests are stored in a ```test``` directory relative to the Gruntfile. To get fancy and allow individual tests to be run by name, you can do something like:
+
+```javascript
+module.exports = function(grunt) {
+  grunt.initConfig({
+    mocha: {
+      options: {
+        reporter: 'Nyan', // Duh!
+        run: true
+      }
+    }
+  });
+
+  grunt.registerTask('test', 'Run Mocha tests.', function() {
+    // If not --test option is specified, run all tests.
+    var test_case = grunt.option('test') || '**/*';
+
+    grunt.config.set('mocha.browser', ['test/' + test_case + '.html']);
+    grunt.task.run('mocha');
+  });
+});
+```
+
+In the above, a custom task ```test``` is registered by the ```test```. Therefore, when ```./node_modules/grunt-cli/bin/grunt test``` is run from the CLI, the function registered at task ```test``` is run. That function being:
+
+```javascript
+    // If not --test option is specified, run all tests.
+    var test_case = grunt.option('test') || '**/*';
+
+    grunt.config.set('mocha.browser', ['test/' + test_case + '.html']);
+    grunt.task.run('mocha');
+```
+
+Which just checks the command line for a ```test``` option, configuring the standard Mocha task to use either the CLI supplied test or the default glob ```**/*``` for all tests. Then, it simply runs the standard Mocha task (which comes from ```grunt.loadNpmTasks('grunt-mocha');```). 
+.
+
+So, if for example, there were two tests (```./test/test1.html``` and ```./test/test2.html```), you can run the commands:
+
+```bash
+./node_modules/grunt-cli/bin/grunt test --test=test1
+./node_modules/grunt-cli/bin/grunt test --test=test2
+```
+
+The above command would run each test indivdually. Alternatively, to run all the tests, you just run the default test command:
+
+```bash
+./node_modules/grunt-cli/bin/grunt test
+```
 
 #### RequireJS Configuration for Your Gruntfile:
 
