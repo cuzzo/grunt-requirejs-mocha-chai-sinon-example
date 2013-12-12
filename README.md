@@ -358,7 +358,7 @@ Other Resources
 Acknowledgements
 ----------------
 
-* [Mocha-AMD-Example](https://github.com/netdance/Mocha-AMD-example) - Special thanks to Jim Driscoll for his fork, and suggestion to use Bower. Check out his fork, he's taking it to some interesting places, to the next level. 
+* [Mocha-AMD-Example](https://github.com/netdance/Mocha-AMD-example) - Special thanks to Jim Driscoll for his fork, and suggestion to use Bower. Check out his fork. He's taking it to some interesting places, to the next level. 
 
 License
 -------
