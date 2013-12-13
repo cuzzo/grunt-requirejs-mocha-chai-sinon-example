@@ -286,8 +286,7 @@ grunt.config.set('mocha.browser', ['test/' + test_case + '.html']);
 grunt.task.run('mocha');
 ```
 
-Which just checks the command line for a "test" option, configuring the standard Mocha task to use either the CLI supplied test or the default glob "**/*" for all tests. Then, it simply runs the standard Mocha task (which comes from ```grunt.loadNpmTasks('grunt-mocha');```). 
-.
+Which just checks the command line for a "test" option, configuring the standard Mocha task to use either the CLI supplied test or the default glob "**/*" for all tests. Then, it simply runs the standard Mocha task (which comes from ```grunt.loadNpmTasks('grunt-mocha');```).
 
 So, if for example, there were two tests (```./test/test1.html``` and ```./test/test2.html```), you can run the commands:
 
@@ -306,9 +305,9 @@ Grunt's [Task Runner Documentation](http://gruntjs.com/api/grunt.task "The Gurnt
 
 ### Multipurpose Reusable RequireJS Config File
 
-If you immediately run Config, you can't modify or easily access the RequireJS configuration from other files.
+If you immediately run ```require.config()``` with your RequireJS config options, you can't modify or easily access the the config options from other files.
 
-Therefore, it's better to store the RequireJS config dictionary in a ```Config``` variable. Later, it can be exported either AMD-like (for RequireJS) or CommonJS-like (for node). E.G.:
+Therefore, it's better to store the config options in some dictionary ```Config```. Later, it can be exported either AMD-like (for RequireJS) or CommonJS-like (for node). E.G.:
 
 ```javascript
 (function() {
