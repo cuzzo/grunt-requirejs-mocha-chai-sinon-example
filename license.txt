@@ -3,6 +3,7 @@ In the original BSD license, both occurrences of the phrase "COPYRIGHT HOLDERS A
 Here is the license template:
 
 Copyright (c) 2013, Cuzzo Yahn
+Copyright (c) 2013, James Driscoll
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:

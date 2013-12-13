@@ -1,12 +1,11 @@
 {
-  "name": "grunt-requirejs-mocha-chai-sinon-example",
-  "version": "0.0.1",
-  "dependencies": {
-    "requirejs": "~2.1.4"
-  },
+  "name": "Mocha-AMD-example",
+  "version": "0.1.0",
+  "dependencies": {},
   "devDependencies": {
     "grunt": "~0.4.2",
     "grunt-cli": "~0.1.11",
-    "grunt-mocha": "~0.4.7"
+    "grunt-mocha": "~0.4.7",
+    "bower": "~1.2.8"
   }
 }

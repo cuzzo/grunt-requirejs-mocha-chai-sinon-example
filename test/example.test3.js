@@ -19,39 +19,41 @@ require([
   //http://blog.baltrinic.com/software-development/agile-practices/automated-testing/stop-jquery-loading-twice-with-squire-js
   //injector.mock('jquery', function() { return $; });
 
-  require(['arithmetic'],function(Arithmetic){
-
-    describe('arithmetic Exemplary Test 1', function() {
-      it('Should be 12.', function() {
+  describe('arithmetic Exemplary Test 1', function() {
+    it('Should be 12.', function(done) {
+      require(['arithmetic'],function(Arithmetic){
         chai.assert.equal(Arithmetic.answer, 12);
+        done();
       });
     });
   });
 
-  injector.mock('add-one', function() { 
-    return {
-      addOne: function(x) {
-        return x+6;  // add-one will now always add 6
-      }
-    }
-  }).require(['arithmetic'],function(Arithmetic){
-    describe('arithmetic Exemplary Test 2', function() {
-      it('Should be 42. mocked add-one', function() {
+  describe('arithmetic Exemplary Test 2', function() {
+    it('Should be 42. mocked add-one', function(done) {
+      injector.mock('add-one', function() { 
+        return {
+          addOne: function(x) {
+            return x+6;  // add-one will now always add 6
+          }
+        }
+      }).require(['arithmetic'],function(Arithmetic){
         chai.assert.equal(Arithmetic.answer, 42);
+        done();
       });
     });
   });
 
-  injector2.mock('times-six', function() { 
-    return {
-      timesSix: function(x) {
-        return x*21;  // add-one will now always multiply by 21
-      }
-    }
-  }).require(['arithmetic'],function(Arithmetic){
-    describe('arithmetic Exemplary Test 4', function() {
-      it('Should be 42. mocked times-six', function() {
+  describe('arithmetic Exemplary Test 3', function() {
+    it('Should be 42. mocked times-six', function(done) {
+      injector2.mock('times-six', function() { 
+        return {
+          timesSix: function(x) {
+            return x*21;  // add-one will now always multiply by 21
+          }
+        }
+      }).require(['arithmetic'],function(Arithmetic){
         chai.assert.equal(Arithmetic.answer, 42);
+        done();
       });
     });
   });

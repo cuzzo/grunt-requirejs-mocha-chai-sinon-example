@@ -1,7 +1,7 @@
 Mocha AMD example
 ========================================
 
-An example using Mocha in combination with RequireJS / require.js and Grunt (alongside Chai and Sinon.JS, and Squire.js).
+An example using Mocha in combination with RequireJS / require.js and Grunt (alongside Chai, Sinon.JS, and Squire.js).
 
 
 Usage
@@ -11,7 +11,7 @@ Mocha AMD example has one usage: to demonstrate how to use a bunch of awesome ja
 
 Why is this helpful?  It's pretty tricky to figure it out on your own (or at least it was for me).  So, hopefully, this will be of some help to someone struggling to put this group of libraries together.
 
-Mocha AMD example is purposefully lightweight.  There's no example demonstrating how to tie in Backbone.  But, if you're that far in the game, figuring out that piece should be trivial (I hope xD).
+The Mocha AMD example is purposefully lightweight.  There's no example demonstrating how to tie in Backbone, for instance, but if you're able to set these tests up, taking it from there should be pretty simple.
 
 
 
@@ -43,89 +43,79 @@ module.exports = function(grunt) {
 
 In this example, tests are stored in a ```test``` directory relative to the Gruntfile.
 
-#### RequireJS Configuration for Your Gruntfile:
-
-```javascript
-module.exports = function(grunt) {
-  grunt.initConfig({
-    requirejs: {
-      options: {
-        baseUrl: '.'
-      }
-    }
-  });
-};
-```
-
-This assumes that your RequireJS configuration is in the same directory as your Gruntfile (which it is for this example, but may not be in your case).
-
-
-#### Putting It Together:
-
-```javascript
-module.exports = function(grunt) {
-  grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
-    requirejs: {
-      options: {
-        baseUrl: '.' 
-      }   
-    },  
-    mocha: {
-      browser: ['test/**/*.html'],
-      options: {
-        reporter: 'Nyan', // Duh!
-        run: true
-      }   
-    }   
-  }); 
-
-  grunt.loadNpmTasks('grunt-mocha');
-
-  grunt.registerTask('test', ['mocha']);
-};
-```
-
-
 ### [package.json](https://github.com/isaacs/npm/blob/master/doc/cli/json.md "Detailed package.json Documentation") Configuration
 
-This example uses Grunt, RequireJS, Mocha, Chai, and Sinon.JS--and is, therefore, dependent upon them.
+This example uses Grunt, as well as it's mocha support -- and is, therefore, dependent upon them being installed.
 
-It's good practice to put your projects dependencies inside a package.json file (that makes it easy to fetch all the dependencies with a simple ```npm install``` command).
+It's good practice to put your projects dependencies inside a package.json file, and *also* check them in to your source control.   But for this project, we don't, since you can just download them again checkout with  ```npm install``` command.  (This is one difference between an example project and a production system.)
+
+This package.json file fetches grunt, grunt-cli (which lets you type ```grunt``` on the command line), and grunt-mocha, which allows you to use the mocha section inside your grunt file.
 
 
 ```javascript
 {
-  "name": "grunt-requirejs-mocha-chai-sinon-example",
-  "version": "0.0.1",
+  "name": "Mocha-AMD-example",
+  "version": "0.1.0",
   "dependencies": {
-    "grunt-lib-phantomjs": "~0.3",
-    "requirejs": "~2.1.4",
-    "sinon": "~1.6.0",
-    "chai": "~1.6.0",
-    "mocha": "~1.9.0"
-  },  
+  },
   "devDependencies": {
-    "grunt": "~0.4.1",
-    "grunt-cli": "~0.1.7",
-    "grunt-mocha": "~0.3.1"
+    "grunt": "~0.4.2",
+    "grunt-cli": "~0.1.11",
+    "grunt-mocha": "~0.4.7",
+    "bower": "~1.2.8"
   }
 }
 ```
 
+#### [bower.json](http://bower.io "Main Bower Page") Configuration 
+
+The following is a small subset of bower.json file.  Like the package.json file, it details the dependencies of your project.  While the package.json file lists dependencies for Grunt, the bower.json file lists dependencies that you'll consume in your browser.  For this example, that includes testing libraries.
+
+Since our tests include chai, mocha, sinonjs and squire, we include them here.  The app itself needs requirejs, so that's in the separate production dependencies section.
+
+Like in package.json, you should [check these libraries in to your source control](http://addyosmani.com/blog/checking-in-front-end-dependencies/), so your build isn't dependent on github being up, but again, for our example, we let you fetch it yourself via ```bower install```.
+
+```javascript
+  "devDependencies": {
+    "chai": "~1.8.1",
+    "mocha": "~1.15.1",
+    "sinonjs": "~1.7.3",
+    "squire": "*"
+  },
+  "dependencies": {
+    "requirejs": "~2.1.9"
+  }
+```
+
+
 
 ### [RequireJS Config File](http://requirejs.org/docs/api.html#config "RequireJS Config File Documentation") Example
+
+There are two different RequireJS config files in this example.  The first is for the source:
 
 ```javascript
 require.config({
   'paths': {
-    // src
-    'add-one': 'src/add-one'
+    'add-one': 'src/add-one',
+    'times-six': 'src/times-six',
+    'arithmetic': 'src/arithmetic'
   }
 });
 ```
 
-In this example, there's only one JS file to the "application".  With this config file, the add-one.js code can be accessed like so:
+The second is for the test code:
+
+```javascript
+require.config({
+  'paths': {
+    'squire': 'bower_components/squire/src/Squire'
+  }
+});
+```
+
+For the tests, we first include the source config, then the test config.  That way, when we run our "application", it's free of test dependencies.
+
+In this example, there's three JS files to the "application".  With this config file, the add-one.js code can be accessed like so:
 
 ```
 require(['add-one'], function(AddOne) {
@@ -167,7 +157,7 @@ describe('addOne Test', function() {
 });
 ```
 
-Notice the addition of ```done``` as a parameter to ```it()```.  ```done``` allows your tests to occurr asynchronoulsy, but it requires that it be envoked to end the test--notice the call to ```done()``` at the end of the test.
+Notice the addition of ```done``` as a parameter to ```it()```.  ```done``` allows your tests to occurr asynchronoulsy, but it requires that it be envoked to end the test -- notice the call to ```done();``` at the end of the test.
 
 ### A Stubbing Example with Sinon
 
@@ -182,6 +172,31 @@ describe('addOne Test', function() {
 
 ```sinon.stub().returns()``` allows you to override a function and force it to return whatever you want.  In this example, it returns 42.
 
+### A Stubbing example with Squire
+
+```javascript
+require([
+  'squire'
+  ], function(Squire) {
+  var injector = new Squire();
+  describe('arithmetic Exemplary Test 2', function() {
+    it('Should be 42. mocked add-one', function(done) {
+      injector.mock('add-one', function() { 
+        return {
+          addOne: function(x) {
+            return x+6;  // add-one will now always add 6
+          }
+        }
+      }).require(['arithmetic'],function(Arithmetic){
+        chai.assert.equal(Arithmetic.answer, 42);
+        done();
+      });
+    });
+  });
+);
+```
+
+Sometimes, you need to stub out required dependencies.  Squire offers one way to do that.  First, use require to load squire, initialize an injector instance, then use that to stub out and require (or just require) any required dependencies.  In this example, the 'add-one' dependency of the 'arithmetic' module is replaced with a dummy function which just returns a constant number. 
 
 
 Application Structure
@@ -193,11 +208,9 @@ For this simple example, the path directory is:
 
 ```
 `-repo/          # Repository of all code.
-  `-css/         # Directory containing css / stylesheets.
-  `-lib/         # Directory containing third-party libraries (Chai, Mocha, RequireJS, and Sinon.JS).
   `-src/         # Directory containing the source code of the application (which is a single file: "add-one.js").
   `-test/        # Directory containing the test code.
-  `-config.js    # RequireJS configuration file.
+  `-bower.json   # front end library configuration file
   `-Gruntfile.js # Grunt configuration file.
   `-license.txt  # License to hack.
   `-package.json # package configuratoin file.
@@ -212,8 +225,15 @@ Dependencies
 [Node & npm](https://github.com/joyent/node/wiki/Installation "Node Installation Guide")
 [bower](http://bower.io  "Bower home page") 
 
-If you don't have Node or npm installed, the above link should be easy to follow.  Bower installs easily with npm.
+If you don't have Node or npm installed, the above links should be easy to follow.  Bower installs easily with npm.
 
+For easiest use, you may wish to also install grunt's command line interface, as well as bower, into a globally usable directory in your path, such as /usr/local/bin.
+
+On a Unix (or Mac) system, you'd do this by
+```bash
+sudo npm -g install grunt-cli
+sudo npm -g install bower
+```
 
 
 Getting Started
@@ -222,15 +242,21 @@ Getting Started
 1: Clone the repository.
 
 ```bash
-git clone https://github.com/cuzzo/grunt-requirejs-mocha-chai-sinon-example.git
+git clone https://github.com/netdance/Mocha-AMD-example.git
 ```
+
+(or just use Github's awesome GUI tool)
 
 2: Inside the repository, install the javascript dependencies.
 
 ```bash
 npm install
-bower install
 ```
+then
+```bash
+./node_modules//bower/bin/bower install
+```
+or, if you've installed bower globally, just ```bower install```
 
 3: Run the tests!
 
@@ -238,18 +264,25 @@ bower install
 ./node_modules/grunt-cli/bin/grunt test
 ```
 
+again, if you've installed grunt-cli globally, just ```grunt```
+
 If you don't see something like:
 
 ```
 Running "mocha:browser" (mocha) task
 Testing: test/example.html
- 3   -_-__,------,
- 0   -_-__|  /\_/\ 
- 0   -_-_~|_( ^ .^) 
-     -_-_ ""  "" 
 
-  3 tests complete (125 ms)
 
+  addOne Exemplary Tests
+    ✓ Should be 2. 
+    ✓ Should be 42; Sinon stub. 
+    ✓ Should be 2 (again); unstubbed. 
+
+(... more tests run here)
+
+  11 passing (3ms)
+
+>> 11 passed! (0.00s)
 
 Done, without errors.
 ```
@@ -269,6 +302,6 @@ Other Resources
 License
 -------
 
-grunt-requirejs-mocha-chai-sinon-example is free--as in BSD. Hack your heart out, hackers.
+Mocha-AMD-example is free--as in BSD. Hack your heart out, hackers.
 
-This code was origninally started in cuzzo/grunt-requirejs-mocha-chai-sinon-example - and I'm deeply indebted to him for the clarity of his example.  Hopefully I didn't complicated it too much.
+This code was origninally started in cuzzo/grunt-requirejs-mocha-chai-sinon-example - and I'm deeply indebted to him for the clarity of his example.  Hopefully I didn't complicate it too much.

@@ -1,11 +1,5 @@
 module.exports = function(grunt) {
   grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
-    requirejs: {
-      options: {
-        baseUrl: '.'
-      }
-    },
     mocha: {
       // Test all files ending in .html anywhere inside the test directory.
       browser: ['test/**/*.html'],
@@ -18,9 +12,12 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-mocha');
 
+  // create a task, 'test', which runs mocha
   grunt.registerTask('test', [
     'mocha'
   ]);
+
+  // create a default task which runs the test task
   grunt.registerTask('default', [
     'test'
   ]);
