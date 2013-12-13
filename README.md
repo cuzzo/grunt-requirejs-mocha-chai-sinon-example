@@ -265,6 +265,8 @@ module.exports = function(grunt) {
       }
     }
   });
+  
+  grunt.loadNpmTasks('grunt-mocha');
 
   grunt.registerTask('test', 'Run Mocha tests.', function() {
     // If not --test option is specified, run all tests.
