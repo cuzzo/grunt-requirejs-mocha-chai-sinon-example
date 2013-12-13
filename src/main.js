@@ -8,7 +8,7 @@ define([], function() {
     ], function(AddOne) {
       console.log(AddOne.addOne(1));
     });
-  }
+  };
 
   return Main;
 });
