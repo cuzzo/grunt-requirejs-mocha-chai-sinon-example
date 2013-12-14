@@ -56,11 +56,15 @@ It's good practice to put your project's dependencies inside a ```package.json``
   "devDependencies": {
     "underscore": "~1.5.2",
     "requirejs": "~2.1.4",
+    "bower": "~1.9.2",
     "grunt": "~0.4.1",
     "grunt-cli": "~0.1.7",
     "grunt-contrib-requirejs": "~0.4.1",
     "grunt-lib-phantomjs": "~0.3",
     "grunt-mocha": "~0.3.1"
+  },
+  "scripts": {
+    "postinstall": "bower install; grunt dist"
   }
 }
 ```
@@ -197,7 +201,6 @@ Dependencies
 ------------
 
 * [Node & npm](https://github.com/joyent/node/wiki/Installation "Node Installation Guide") - If you don't have Node or npm installed, the above link should be easy to follow.
-* [Bower](https://github.com/bower/bower#installing-bower "Bower Installation Guide") - If you don't have Bower installed, the above link should be easy to follow.
 
 Getting Started
 ---------------
@@ -212,10 +215,7 @@ git clone https://github.com/cuzzo/grunt-requirejs-mocha-chai-sinon-example.git
 
 ```bash
 npm install
-bower install
 ```
-
-```npm install``` will install the node.js dependencies--the ones you will use to, among other things, run Mocha tests on your code. ```bower install``` will install the dependencies for the client--the ones that run inside the user's browser.
 
 3: Run the tests!
 
@@ -241,12 +241,7 @@ Done, without errors.
 
 you messed something up (somehow).
 
-4: If you succeeded, build the distributable with RequireJS and Grunt.
-```bash
-./node_modules/grunt-cli/bin/grunt dist
-```
-
-5: Check ```./example/main.dev.html``` and ```./example/main.dist.html``` for "2" in the Console's log. That means it worked.
+4: Check ```./example/main.dev.html``` and ```./example/main.dist.html``` for "2" in the Console's log. That means it worked.
 
 Getting Fancy
 -------------
@@ -331,9 +326,7 @@ Therefore, it's better to store the config options in some dictionary ```Config`
   // If 'define' exists as a function, run main.
   if (typeof define === 'function') {
     require.config(Config);
-    require([
-      'main'
-    ], function(Main) {
+    require(['main'], function(Main) {
       Main.main();
     });
     return true;

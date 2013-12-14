@@ -19,9 +19,7 @@
   // If 'define' exists as a function, run main.
   if (typeof define === 'function') {
     require.config(Config);
-    require([
-      'main'
-    ], function(Main) {
+    require(['main'], function(Main) {
       Main.main();
     });
     return true;
