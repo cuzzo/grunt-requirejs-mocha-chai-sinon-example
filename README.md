@@ -208,7 +208,7 @@ require([
 );
 ```
 
-Sometimes, you need to stub out required dependencies.  Squire offers one way to do that.  First, use require to load squire, initialize an injector instance, then use that to stub out and require (or just require) any required dependencies.  In this example, the 'add-one' dependency of the 'arithmetic' module is replaced with a dummy function which just returns a constant number. 
+Sometimes, you need to stub out required dependencies.  Squire offers one way to do that.  First, use require to load squire, initialize an injector instance, then use that to stub out and require (or just require without a stub) any dependencies.  In this example, the 'add-one' dependency of the 'arithmetic' module is replaced with a dummy function which just returns a constant number. 
 
 
 Application Structure
@@ -220,7 +220,7 @@ For this simple example, the path directory is:
 
 ```
 `-repo/          # Repository of all code.
-  `-src/         # Directory containing the source code of the application (which is a single file: "add-one.js").
+  `-src/         # Directory containing the source code of the application
   `-test/        # Directory containing the test code.
   `-bower.json   # front end library configuration file
   `-Gruntfile.js # Grunt configuration file.
