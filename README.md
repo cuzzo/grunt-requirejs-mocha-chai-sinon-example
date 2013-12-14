@@ -200,7 +200,7 @@ For this simple example, the path directory is:
 Dependencies
 ------------
 
-* [Node & npm](https://github.com/joyent/node/wiki/Installation "Node Installation Guide") - If you don't have Node or npm installed, the above link should be easy to follow.
+* [Node & npm](https://github.com/joyent/node/wiki/Installation "Node Installation Guide") - If you don't have Node or npm installed, follow the link.
 
 Getting Started
 ---------------
