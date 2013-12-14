@@ -1,7 +1,7 @@
 require.config({
   'paths': {
-    'add-one': 'src/add-one',
-    'times-six': 'src/times-six',
-    'arithmetic': 'src/arithmetic'
+    'add-one': 'add-one',
+    'times-six': 'times-six',
+    'arithmetic': 'arithmetic'
   }
 });
