@@ -29,7 +29,7 @@ module.exports = function(grunt) {
       // Test all files ending in .html anywhere inside the test directory.
       browser: ['test/**/*.html'],
       options: {
-        reporter: 'Nyan', // Duh!
+        reporter: 'Spec', 
         run: true
       }   
     }
@@ -47,7 +47,7 @@ In this example, tests are stored in a ```test``` directory relative to the Grun
 
 This example uses Grunt, as well as it's mocha support -- and is, therefore, dependent upon them being installed.
 
-It's good practice to put your projects dependencies inside a package.json file, and *also* check them in to your source control.   But for this project, we don't, since you can just download them again checkout with  ```npm install``` command.  (This is one difference between an example project and a production system.)
+It's good practice to put your projects dependencies inside a package.json file, and *also* check them in to your source control.   But for this project, we don't, since you can just download them again on checkout with  ```npm install``` command.  (This is the difference between an example project and a production system.)
 
 This package.json file fetches grunt, grunt-cli (which lets you type ```grunt``` on the command line), and grunt-mocha, which allows you to use the mocha section inside your grunt file.
 
@@ -96,9 +96,9 @@ There are two different RequireJS config files in this example.  The first is fo
 ```javascript
 require.config({
   'paths': {
-    'add-one': 'src/add-one',
-    'times-six': 'src/times-six',
-    'arithmetic': 'src/arithmetic'
+    'add-one': 'add-one',
+    'times-six': 'times-six',
+    'arithmetic': 'arithmetic'
   }
 });
 ```
@@ -108,7 +108,7 @@ The second is for the test code:
 ```javascript
 require.config({
   'paths': {
-    'squire': 'bower_components/squire/src/Squire'
+    'squire': '../bower_components/squire/src/Squire'
   }
 });
 ```
@@ -157,7 +157,19 @@ describe('addOne Test', function() {
 });
 ```
 
-Notice the addition of ```done``` as a parameter to ```it()```.  ```done``` allows your tests to occurr asynchronoulsy, but it requires that it be envoked to end the test -- notice the call to ```done();``` at the end of the test.
+Notice the addition of ```done``` as a parameter to ```it()```.  ```done``` allows your tests to occurr asynchronoulsy, but it requires that it be envoked to end the test -- notice the call to ```done();``` at the end of the test.  You can also wrap the whole test with the require - then you won't need to call 'done()'.
+
+```javascript
+require([
+     'add-one'
+], function(AddOne) {
+  describe('addOne Test', function() {
+      it('Should be 2.', function(done) {
+        chai.assert.equal(AddOne.addOne(1), 2);
+      });
+  });
+});
+```
 
 ### A Stubbing Example with Sinon
 
