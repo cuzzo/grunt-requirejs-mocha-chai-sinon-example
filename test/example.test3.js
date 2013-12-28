@@ -30,11 +30,9 @@ require([
 
   describe('arithmetic Exemplary Test 2', function() {
     it('Should be 42. mocked add-one', function(done) {
-      injector.mock('add-one', function() { 
-        return {
-          addOne: function(x) {
-            return x+6;  // add-one will now always add 6
-          }
+      injector.mock('add-one', {
+        addOne: function(x) {
+          return x+6;  // add-one will now always add 6
         }
       }).require(['arithmetic'],function(Arithmetic){
         chai.assert.equal(Arithmetic.answer, 42);
@@ -43,13 +41,12 @@ require([
     });
   });
 
+
   describe('arithmetic Exemplary Test 3', function() {
     it('Should be 42. mocked times-six', function(done) {
-      injector2.mock('times-six', function() { 
-        return {
-          timesSix: function(x) {
-            return x*21;  // add-one will now always multiply by 21
-          }
+      injector2.mock('times-six', { 
+        timesSix: function(x) {
+          return x*21;  // add-one will now always multiply by 21
         }
       }).require(['arithmetic'],function(Arithmetic){
         chai.assert.equal(Arithmetic.answer, 42);
@@ -57,5 +54,6 @@ require([
       });
     });
   });
+
 
 });
