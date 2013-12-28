@@ -8,7 +8,7 @@ require(['config'], function() {
         'arithmetic', 
     ], function (Arithmetic) {
         console.log('starting app from main');
-        alert("Should be 12:" + Arithmetic.answer);
+        alert("Should be 12 - it's actually " + Arithmetic.answer);
     });
 
 });
