@@ -1,7 +1,7 @@
 grunt-requirejs-mocha-chai-sinon-example
 ========================================
 
-An example using Mocha in combination with RequireJS / require.js and Grunt (alongside Chai and Sinon.JS).
+An example using mocha / chai / sinon in combination with RequireJS and Grunt.js and on top of PhantomJS. Running JavaScript tests from the command line has never been so easy.
 
 
 Usage
