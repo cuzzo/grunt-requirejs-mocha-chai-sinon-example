@@ -179,7 +179,7 @@ describe('addOne Test', function() {
 
 `sinon.stub().returns()` allows you to override a function and force it to return whatever you want.  In this example, it returns 42.
 
-NOTE: to stub an object's method you use `sinon.stub(Object, "methodName")`. To create a simple stub, you only use: `var x = sinon.stub()`.
+* **NOTE**: to stub an object's method you use: `sinon.stub(Object, "methodName")`.
 
 Application Structure
 ---------------------
