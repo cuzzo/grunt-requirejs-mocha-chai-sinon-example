@@ -43,8 +43,12 @@ describe('addOne Exemplary Tests', function() {
 
   it('Should be 42; Sinon stub.', function() {
     // Stub addOne to return 42--no matter what.
-    AddOne.addOne = sinon.stub().returns(42);
+    sinon.stub(AddOne, "addOne").returns(42);
+
     chai.assert.equal(AddOne.addOne(1), 42);
+
+    // Don't forget to restore (not necessary with clone, but good practice).
+    AddOne.addOne.restore();
   });
 
   it('Should be 2 (again); unstubbed.', function() {

@@ -37,7 +37,7 @@ module.exports = function(grunt) {
 };
 ```
 
-In this example, tests are stored in a ```test``` directory relative to the Gruntfile. 
+In this example, tests are stored in a `test` directory relative to the Gruntfile. 
 
 You can also run tasks individually with a more robust [Custom Grunt Task](#custom-mocha-task).
 
@@ -45,7 +45,7 @@ You can also run tasks individually with a more robust [Custom Grunt Task](#cust
 
 This example uses Grunt, RequireJS, Mocha, Chai, and Sinon.JS--and is, therefore, dependent upon them.
 
-It's good practice to put your project's dependencies inside a ```package.json``` file (that makes it easy to fetch all the dependencies with a simple ```npm install``` command).
+It's good practice to put your project's dependencies inside a `package.json` file (that makes it easy to fetch all the dependencies with a simple `npm install` command).
 
 ```javascript
 {
@@ -71,9 +71,9 @@ It's good practice to put your project's dependencies inside a ```package.json``
 
 ### [bower.json](http://bower.io/#defining-a-package "Detailed bower.json Documentation") Configuration
 
-```bower.json``` is the equivalent of ```package.json``` for your client-specifc dependencies. ```package.json``` is for defining the packages used on your machine for development. ```bower.json``` is for defining the packages that will be used on the clients' machines--think jQuery.
+`bower.json` is the equivalent of `package.json` for your client-specifc dependencies. `package.json` is for defining the packages used on your machine for development. `bower.json` is for defining the packages that will be used on the clients' machines--think jQuery.
 
-It's good practice to put your project's client-side dependencies in a ```bower.json``` file (that makes it easy to fetch all the dependencies with a simple ```bower install``` command).
+It's good practice to put your project's client-side dependencies in a `bower.json` file (that makes it easy to fetch all the dependencies with a simple `bower install` command).
 
 ```javascript
 {
@@ -159,20 +159,27 @@ describe('addOne Test', function() {
 });
 ```
 
-Notice the addition of ```done``` as a parameter to ```it()```.  ```done``` allows your tests to occurr asynchronoulsy, but it requires that it be envoked to end the test--notice the call to ```done()``` at the end of the test.
+Notice the addition of `done` as a parameter to `it()`.  `done` allows your tests to occurr asynchronoulsy, but it requires that it be envoked to end the test--notice the call to `done()` at the end of the test.
 
 ### A Stubbing Example with Sinon
 
 ```javascript
 describe('addOne Test', function() {
   it('Should be 42; stubbed by sinon.', function() {
-    AddOne.addOne = sinon.stub().returns(42);
+    // Stub addOne to return 42--no matter what.
+    sinon.stub(AddOne, "addOne").returns(42);
+
     chai.assert.equal(AddOne.addOne(1), 42);
+
+    // Don't forget to restore (not necessary with clone, but good practice).
+    AddOne.addOne.restore();
   });
 });
 ```
 
-```sinon.stub().returns()``` allows you to override a function and force it to return whatever you want.  In this example, it returns 42.
+`sinon.stub().returns()` allows you to override a function and force it to return whatever you want.  In this example, it returns 42.
+
+NOTE: to stub an object's method you use `sinon.stub(Object, "methodName")`. To create a simple stub, you only use: `var x = sinon.stub()`.
 
 Application Structure
 ---------------------
@@ -241,7 +248,7 @@ Done, without errors.
 
 you messed something up (somehow).
 
-4: Check ```./example/main.dev.html``` and ```./example/main.dist.html``` for "2" in the Console's log. That means it worked.
+4: Check `./example/main.dev.html` and `./example/main.dist.html` for "2" in the Console's log. That means it worked.
 
 Getting Fancy
 -------------
@@ -273,7 +280,7 @@ module.exports = function(grunt) {
 });
 ```
 
-In the above, a custom task ```test``` is registered by the name "test". Therefore, when ```./node_modules/grunt-cli/bin/grunt test``` is run from the CLI, the function registered at task "test" is run. That function being:
+In the above, a custom task `test` is registered by the name "test". Therefore, when `./node_modules/grunt-cli/bin/grunt test` is run from the CLI, the function registered at task "test" is run. That function being:
 
 ```javascript
 // If not --test option is specified, run all tests.
@@ -283,9 +290,9 @@ grunt.config.set('mocha.browser', ['test/' + test_case + '.html']);
 grunt.task.run('mocha');
 ```
 
-Which just checks the command line for a "test" option, configuring the standard Mocha task to use either the CLI supplied test or the default glob "**/*" for all tests. Then, it simply runs the standard Mocha task (which comes from ```grunt.loadNpmTasks('grunt-mocha');```).
+Which just checks the command line for a "test" option, configuring the standard Mocha task to use either the CLI supplied test or the default glob "**/*" for all tests. Then, it simply runs the standard Mocha task (which comes from `grunt.loadNpmTasks('grunt-mocha');`).
 
-So, if for example, there were two tests (```./test/test1.html``` and ```./test/test2.html```), you can run the commands:
+So, if for example, there were two tests (`./test/test1.html` and `./test/test2.html`), you can run the commands:
 
 ```bash
 ./node_modules/grunt-cli/bin/grunt test --test=test1
@@ -302,9 +309,9 @@ Grunt's [Task Runner Documentation](http://gruntjs.com/api/grunt.task "The Gurnt
 
 ### Multipurpose Reusable RequireJS Config File
 
-If you immediately run ```require.config()``` with your RequireJS config options, you can't modify or easily access the the config options from other files.
+If you immediately run `require.config()` with your RequireJS config options, you can't modify or easily access the the config options from other files.
 
-Therefore, it's better to store the config options in some dictionary ```Config```. Later, it can be exported either AMD-like (for RequireJS) or CommonJS-like (for node). E.G.:
+Therefore, it's better to store the config options in some dictionary `Config`. Later, it can be exported either AMD-like (for RequireJS) or CommonJS-like (for node). E.G.:
 
 ```javascript
 (function() {
@@ -386,7 +393,7 @@ module.exports = function(grunt) {
 };
 ```
 
-This assumes that your RequireJS configuration is in directory ```src``` relative to your Gruntfile (which it is for this example, but may not be in your case). Notice the ```requirejs.compile.options``` set to "./src".
+This assumes that your RequireJS configuration is in directory `src` relative to your Gruntfile (which it is for this example, but may not be in your case). Notice the `requirejs.compile.options` set to "./src".
 
 ### Putting it Together
 
