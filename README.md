@@ -227,7 +227,7 @@ npm install
 3: Run the tests!
 
 ```bash
-./node_modules/grunt-cli/bin/grunt test
+npm test
 ```
 
 If you don't see something like:
