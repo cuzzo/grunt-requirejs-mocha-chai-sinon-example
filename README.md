@@ -11,7 +11,7 @@ grunt-requirejs-mocha-chai-sinon-example has one usage: to demonstrate how to us
 
 Why is this helpful?  It's pretty tricky to figure it out on your own (or at least it was for me).  So, hopefully, this will be of some help to someone struggling to put this group of libraries together.
 
-grunt-requirejs-mocha-chai-sinon-example is purposefully lightweight.  There's no example demonstrating how to tie in Backbone.  But, if you're that far in the game, figuring out that piece should be trivial (I hope xD).
+grunt-requirejs-mocha-chai-sinon-example is purposefully lightweight.  There's no example demonstrating how to tie in [React.JS](https://facebook.github.io/react/ "React.JS Documentation") or [Backbone](http://backbonejs.org/ "Backbone Documenation").  But, if you're that far in the game, figuring out that last piece should be trivial (I hope xD).
 
 Configuration Examples
 ----------------------
@@ -458,6 +458,7 @@ Other Resources
 * [Grunt Guide](http://gruntjs.com/getting-started "Getting Started with Grunt") - Grunt's documentation (in case you have any troubles with grunt or grunt-cli).
 * [Sinon Examples](http://sinonjs.org/docs/ "Sinon Documentation - Mocks and Stubs and Spies, oh my!") - Use cases for Sinon (and why you might want to consider using it, if you're not already).
 * [Mocha Examples](http://visionmedia.github.io/mocha/#getting-started "Getting Started with Mocha.js") - Unit tests example with Mocha (and why you might want to consider it, if you're using something else).
+* [RequireJS / React.JS + JSX Configuration](https://github.com/podio/requirejs-react-jsx "RequireJS + React.JS + JSX Configuration Example")
 * [RequireJS / Backbone Configuration](http://gregfranko.com/blog/require-dot-js-2-dot-0-shim-configuration/ "RequireJS / Backbone shim Configuration") - Not the best example, but...
 
 Acknowledgements
